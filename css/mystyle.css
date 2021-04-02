@@ -1,0 +1,39 @@
+body {
+    padding-bottom: 120px;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 30px;
+	line-height: 30px; 
+	background-color: 563d7c;
+	text-align: center;
+}
+
+
+
+.footer > .container-fluid > a{
+	color: white;
+}
+
+mark {
+	background-color: yellow;
+	color: black;
+}
+
+
+ul {
+	list-style-type: none;
+	
+}
+
+#searchform{
+	border:1px solid lightgrey;
+}
+
+#hometitle{
+	background-color: lightgray;
+}
+
