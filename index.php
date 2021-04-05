@@ -2,6 +2,7 @@
 <title>Home page</title>
 <head>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/mystyle.css" />
     
 </head>
@@ -15,6 +16,7 @@
         <h1>Final Project</h1><br>
         <p>This is a project for web programming 2</p>
       </div>
+      
     </div>
   </div>
 
