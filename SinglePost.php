@@ -4,12 +4,25 @@ require_once('config.php');
 try {
    $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+   //sidebar info
+    $sql = "select * from travelimagedetails GROUP by CityCode";
+    $citycodes = $pdo->query($sql);
+   
+   
+   
+    //continents 
+    $sql = 'SELECT * FROM geocontinents';
+    $continents = $pdo->query($sql);
+    
 }
 catch (PDOException $e) {
    die( $e->getMessage() );
 }
 
 if(isset($_GET["id"])){
+    
+
 
     //get the UID from database 
     $sql = 'SELECT * FROM travelpost WHERE PostID ="' . $_GET["id"] . '"';
@@ -32,7 +45,7 @@ if(isset($_GET["id"])){
 
     //get the imagesIDs associated with the postID
     $sql = 'SELECT * FROM travelpostimages WHERE PostID ="' . $_GET["id"] . '"';
-    $result = $pdo->query($sql);
+    $postid = $pdo->query($sql);
     
 }
 
@@ -43,6 +56,7 @@ if(isset($_GET["id"])){
 <title>Single Post</title>
 <head>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/mystyle.css" />
     
 </head>
@@ -52,36 +66,8 @@ if(isset($_GET["id"])){
 <?php include 'header.inc.php'; ?>
 <div class="container-fluid"><br>
     <div class="row" >
-        
-        <div class="col-md-2" >
-            <div class="card ">
-                <div class="card-header" >Countries</div>
-                <ul class="list-group">
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">United States</li>
-                </ul>
-                <div class="card-header" >Cities</div>
-                <ul class="list-group">
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                    <li class="list-group-item">Temp</li>
-                </ul>
-            </div>
-        </div>
-            
+
+        <?php include 'sidebar.inc.php'; ?>
 
         <div class="col-md-7" >
             <H2><?php echo $travelPost["Title"]; ?></h1>
@@ -100,7 +86,7 @@ if(isset($_GET["id"])){
                 <div class="card-deck">
                     <?php
                         //get the images associated with the imageIDs
-                        while($imageIDs = $result->fetch()){
+                        while($imageIDs = $postid->fetch()){
                             $sql = 'SELECT * FROM travelimage WHERE ImageID ="' . $imageIDs["ImageID"] . '"';
                             $result1 = $pdo->query($sql);
                             $imagePath = $result1->fetch();
