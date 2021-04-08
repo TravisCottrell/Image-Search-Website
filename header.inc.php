@@ -15,7 +15,7 @@
     <nav class="navbar navbar-expand-md" >
         <div class="collapse navbar-collapse">
             <ul class="nav nav-tabs mr-auto"> 
-                <li class="navbar-brand" >Project 2</li>
+                <li class="navbar-brand" >Project 3</li>
                 <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
                 <li class="dropdown nav-item" > 

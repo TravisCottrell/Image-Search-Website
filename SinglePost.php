@@ -1,54 +1,28 @@
 <?php 
-
-require_once('config.php'); 
-try {
-   $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
-   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-   //sidebar info
-    $sql = "select * from travelimagedetails GROUP by CityCode";
-    $citycodes = $pdo->query($sql);
-   
-   
-   
-    //continents 
-    $sql = 'SELECT * FROM geocontinents';
-    $continents = $pdo->query($sql);
-    
-}
-catch (PDOException $e) {
-   die( $e->getMessage() );
-}
+require_once("DB.class.php");
+$dbhandle = new DB();
 
 if(isset($_GET["id"])){
+     //get the UID from database 
+    $travelPost = $dbhandle->get_for_singlepost_UID($_GET["id"]);
+
+     //use UID to get the traveluserdetils
+    $userInfo = $dbhandle->get_for_singlepost_names($travelPost["UID"]);
+
+      //use UID to get the travelpost
+    $postInfo = $dbhandle->get_for_singlepost_userposts($travelPost['UID']);
     
-
-
-    //get the UID from database 
-    $sql = 'SELECT * FROM travelpost WHERE PostID ="' . $_GET["id"] . '"';
-    $result = $pdo->query($sql);
-    $travelPost = $result->fetch();
-
-    //check if the query was succesful
-    $count = $result->rowCount();
-    if($count  <= 0){
-        //if it wasnt, redirect to error page 
-        header("Location: error.php");
-        exit();
-    }
-
-    //use UID to get the traveluserdetils
-    $sql = 'SELECT * FROM traveluserdetails WHERE UID ="' . $travelPost['UID'] . '"';
-    $result = $pdo->query($sql);
-    $userInfo = $result->fetch();
-    
-
     //get the imagesIDs associated with the postID
-    $sql = 'SELECT * FROM travelpostimages WHERE PostID ="' . $_GET["id"] . '"';
-    $postid = $pdo->query($sql);
-    
+    $images = $dbhandle->get_for_singlepost_related_images($_GET["id"]);
+   
+//     //check if the query was succesful
+//     $count = $result->rowCount();
+//     if($count  <= 0){
+//         // redirect to error page if query wasn't succesful 
+//         header("Location: error.php");
+//         exit();
+//     }
 }
-
 ?>
 
 
@@ -86,41 +60,48 @@ if(isset($_GET["id"])){
                 <div class="card-deck">
                     <?php
                         //get the images associated with the imageIDs
-                        while($imageIDs = $postid->fetch()){
-                            $sql = 'SELECT * FROM travelimage WHERE ImageID ="' . $imageIDs["ImageID"] . '"';
-                            $result1 = $pdo->query($sql);
-                            $imagePath = $result1->fetch();
-                            
-                            $sql2 = 'SELECT * FROM travelimagedetails WHERE ImageID ="' . $imageIDs["ImageID"] . '"';
-                            $result2 = $pdo->query($sql2);
-                            $imagedetails = $result2->fetch();     
+                        foreach($images as $imageIDs){
+                          
                     ?> 
                     <div class="card">
-                        <?php echo "<a href='Part03_SingleImage.php?id=" .$imageIDs["ImageID"] ."'>"."<img src='images/square-medium/" . $imagePath['Path'] ."' class='card-img-top'></a>"; ?>
+                        <?php echo "<a href='Part03_SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>"."<img src='images/square-medium/" . $imageIDs["imagePath"]['Path'] ."' class='card-img-top'></a>"; ?>
                         <div class="card-body  flex-column">
-                            <p class="card-text"> <?php echo "<a href='Part03_SingleImage.php?id=" .$imageIDs["ImageID"] ."'>".  $imagedetails["Title"] ."</a>";?></p>
-                            <?php echo "<a class='mt-auto btn btn-primary'   href='Part03_SingleImage.php?id=" .$imageIDs["ImageID"]. "' role='button'>View</a>";?>
+                            <p class="card-text"> <?php echo "<a href='Part03_SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>".  $imageIDs["imageDetails"]["Title"] ."</a>";?></p>
+                            <?php echo "<a class='mt-auto btn btn-primary'   href='Part03_SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"]. "' role='button'>View</a>";?>
                             <button type="button" class="btn btn-secondary">fav</button>
                         </div>
                     </div>
-                    <?php } ?> <!--end while loop -->
+                    <?php } ?> <!--end foreach loop -->
                 </div> <!--end card-deck -->
             </div>
         </div>
             
+        
         <div class="col-md-2" >
+            <!-- Post details card -->
             <div class="card">
                 <div class="card-header" >Post Details</div>
-                    <ul class="list-group">
-                        <li class="list-group-item">Date: <?php echo $travelPost["PostTime"]; ?></li>
-                        <li class="list-group-item">Posted By: 
-                            <?php 
-                                $fullName = "<a href='#'>" . $userInfo["FirstName"] . " " . $userInfo["LastName"] . "</a>";
-                                echo $fullName;
-                            ?>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">Date: <?php echo $travelPost["PostTime"]; ?></li>
+                    <li class="list-group-item">Posted By: 
+                        <?php 
+                            $fullName = "<a href='#'>" . $userInfo["FirstName"] . " " . $userInfo["LastName"] . "</a>";
+                            echo $fullName;
+                        ?>
+                    </li>
+                </ul>
+            </div><br>
+
+            <!-- other posts card -->
+            <div class="card">
+                <div class="card-header" >posts from this user</div>
+                <ul class="list-group">
+                    <?php
+                        foreach($postInfo as $posts){
+                            echo "<a href='SinglePost.php?id=".$posts["PostID"]."'><li class='list-group-item'>". $posts["Title"] ."</li></a>";
+                        }
+                    ?> 
+                </ul>
             </div>
         </div>
 
