@@ -64,10 +64,10 @@ if(isset($_GET["id"])){
                           
                     ?> 
                     <div class="card">
-                        <?php echo "<a href='Part03_SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>"."<img src='images/square-medium/" . $imageIDs["imagePath"]['Path'] ."' class='card-img-top'></a>"; ?>
+                        <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>"."<img src='images/square-medium/" . $imageIDs["imagePath"]['Path'] ."' class='card-img-top'></a>"; ?>
                         <div class="card-body  flex-column">
-                            <p class="card-text"> <?php echo "<a href='Part03_SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>".  $imageIDs["imageDetails"]["Title"] ."</a>";?></p>
-                            <?php echo "<a class='mt-auto btn btn-primary'   href='Part03_SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"]. "' role='button'>View</a>";?>
+                            <p class="card-text"> <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>".  $imageIDs["imageDetails"]["Title"] ."</a>";?></p>
+                            <?php echo "<a class='mt-auto btn btn-primary'   href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"]. "' role='button'>View</a>";?>
                             <button type="button" class="btn btn-secondary">fav</button>
                         </div>
                     </div>

@@ -31,7 +31,7 @@ catch (PDOException $e) {
         $sql = "SELECT * FROM travelpost ORDER BY Title";
         $result = $pdo->query($sql);
         while ($row = $result->fetch()) {
-            echo "<li><a href=' Part02_SinglePost.php?id=" .$row["PostID"]. "'>" . $row["Title"]. "</a></li>"; 
+            echo "<li><a href='SinglePost.php?id=" .$row["PostID"]. "'>" . $row["Title"]. "</a></li>"; 
         }
         ?>
     </ul>
