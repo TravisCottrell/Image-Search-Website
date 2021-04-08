@@ -1,10 +1,6 @@
 <?php
 require_once('config.php'); 
 
-
-
-    
-
 class DB extends PDO{
  
     public function __construct(){
