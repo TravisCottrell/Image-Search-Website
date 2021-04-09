@@ -62,7 +62,7 @@ if(isset($_GET["id"])){
                                 <li class="list-group-item">
                                     Posted By: 
                                     <?php 
-                                        $fullName = "<a href='#'>" . $userInfo["FirstName"] . " " . $userInfo["LastName"] . "</a>";
+                                        $fullName = "<a href='DisplaySIngleUser.php?UID=".$userInfo["UID"]."'>" . $userInfo["FirstName"] . " " . $userInfo["LastName"] . "</a>";
                                         echo $fullName;
                                     ?>
                                 </li>
@@ -100,11 +100,14 @@ if(isset($_GET["id"])){
                         <div class="col-md-3">
                             <div class="card border-dark mb-3">
                                 <center>
+                                    <!-- image with link -->
                                     <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>"."<img src='images/square-medium/" . $imageIDs["imagePath"]['Path'] ."' class='img-thumbnail'></a>"; ?>
-                            
+
+                                    <!-- title with link -->
                                     <p> <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>".  $imageIDs["imageDetails"]["Title"] ."</a>";?>
                                     </p>
-                                
+
+                                    <!-- view button with link -->
                                     <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"]. "'><button type='button' class='btn btn-warning'>
                                     View</a>";?>
                                     </button>

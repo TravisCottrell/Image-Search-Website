@@ -6,7 +6,6 @@ class DB extends PDO{
     public function __construct(){
         parent::__construct(DBCONNSTRING,DBUSER,DBPASS);
         $this->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // always disable emulated prepared statement when using the MySQL driver
         $this->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
     
@@ -22,15 +21,15 @@ class DB extends PDO{
     public function get_for_singlepost_UID($id){
         //get the UID from travelpost
         $sql = 'SELECT * FROM travelpost WHERE PostID ="'. $id .'"';
-        $result = $this->query($sql);
-        return $result->fetch();
+        return $this->query($sql)->fetch();
+        
     }
 
     public function get_for_singlepost_names($id){
         //use UID to get the traveluserdetils for user details card 
         $sql = 'SELECT * FROM traveluserdetails WHERE UID ="' . $id . '"';
-        $result = $this->query($sql);
-        return $result->fetch();
+        return $this->query($sql)->fetch();
+         
     }
 
     public function get_for_singlepost_userposts($id){
@@ -116,8 +115,18 @@ class DB extends PDO{
         $result = $this->query($sql);
         while ($row = $result->fetch()) {
             $fullname = $row['FirstName'] ." ". $row["LastName"];
-            echo "<li><a href='#'>" . $fullname. "</a></li>"; 
+            echo "<li><a href='DisplaySIngleUser.php?UID=".$row["UID"]."'>" . $fullname. "</a></li>"; 
         }
+    }
+
+    public function get_for_SingleUser_info($UID){
+        $sql = "SELECT * FROM traveluserdetails WHERE UID = $UID";
+        return $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function get_for_SingleUser_relatedimages($UID){
+        $sql = "SELECT * FROM travelimage WHERE UID = $UID";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
     
 }
