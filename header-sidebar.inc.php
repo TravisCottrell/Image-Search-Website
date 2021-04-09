@@ -39,3 +39,6 @@
         </div>
     </nav>
 </header>
+ <main class="container">
+        <div class="row">
+            <?php include 'sidebar.inc.php'; ?>

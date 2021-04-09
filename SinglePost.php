@@ -24,8 +24,6 @@ if(isset($_GET["id"])){
 //     }
 }
 ?>
-
-
 <html>
 <title>Single Post</title>
 <head>
@@ -35,77 +33,90 @@ if(isset($_GET["id"])){
     
 </head>
 
+<body>
+<?php include 'header-sidebar.inc.php'; ?>
 
-<body  >
-<?php include 'header.inc.php'; ?>
-<div class="container-fluid"><br>
-    <div class="row" >
 
-        <?php include 'sidebar.inc.php'; ?>
-
-        <div class="col-md-7" >
-            <H2><?php echo $travelPost["Title"]; ?></h1>
+        <div class="col-md-10">
             <div class="row">
-                <div class="col">
-                    <p> <?php echo $travelPost["Message"]; ?> </p>
+                <div class="col-md-12">
+                    <br>
+                <h2><?php echo $travelPost["Title"]; ?></h2>
                 </div>
             </div>
-
-            <div class="row" >
-                <div class="col">
-                    <h3>Travel images for this post </h3>
-                </div>
-            </div>
-            <div class="row" >
-                <div class="card-deck">
-                    <?php
-                        //get the images associated with the imageIDs
-                        foreach($images as $imageIDs){
-                          
-                    ?> 
-                    <div class="card">
-                        <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>"."<img src='images/square-medium/" . $imageIDs["imagePath"]['Path'] ."' class='card-img-top'></a>"; ?>
-                        <div class="card-body  flex-column">
-                            <p class="card-text"> <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>".  $imageIDs["imageDetails"]["Title"] ."</a>";?></p>
-                            <?php echo "<a class='mt-auto btn btn-primary'   href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"]. "' role='button'>View</a>";?>
-                            <button type="button" class="btn btn-secondary">fav</button>
+                <div class="row">
+                    <div class="col-md-9" >
+                    <p> <?php echo $travelPost["Message"]; ?> </p>            
+                    </div>
+                      
+                    <div class="col-md-3" >
+                        <!-- Post details card -->
+                        <div class="card">
+                            <div class="card-header" >
+                             Post Details
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Date: <?php echo $travelPost["PostTime"]; ?>
+                                 </li>
+                                <li class="list-group-item">
+                                    Posted By: 
+                                    <?php 
+                                        $fullName = "<a href='#'>" . $userInfo["FirstName"] . " " . $userInfo["LastName"] . "</a>";
+                                        echo $fullName;
+                                    ?>
+                                </li>
+                            </ul>
+                        </div>
+                        <br>
+                        <!-- other posts card -->
+                        <div class="card">
+                            <div class="card-header" >
+                                Posts from this user
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <?php
+                                    foreach($postInfo as $posts){
+                                        echo "<a href='SinglePost.php?id=".$posts["PostID"]."'><li class='list-group-item'>". $posts["Title"] ."</li></a>";
+                                    }
+                                ?> 
+                            </ul>
                         </div>
                     </div>
-                    <?php } ?> <!--end foreach loop -->
-                </div> <!--end card-deck -->
-            </div>
-        </div>
-            
-        
-        <div class="col-md-2" >
-            <!-- Post details card -->
-            <div class="card">
-                <div class="card-header" >Post Details</div>
-                <ul class="list-group">
-                    <li class="list-group-item">Date: <?php echo $travelPost["PostTime"]; ?></li>
-                    <li class="list-group-item">Posted By: 
-                        <?php 
-                            $fullName = "<a href='#'>" . $userInfo["FirstName"] . " " . $userInfo["LastName"] . "</a>";
-                            echo $fullName;
-                        ?>
-                    </li>
-                </ul>
-            </div><br>
+                </div>
 
-            <!-- other posts card -->
-            <div class="card">
-                <div class="card-header" >posts from this user</div>
-                <ul class="list-group">
+            <div class="row">
+                
+                    <h3>Travel images for this post </h3>
+                
+            </div>
+
+            <div class="row">
+                
                     <?php
-                        foreach($postInfo as $posts){
-                            echo "<a href='SinglePost.php?id=".$posts["PostID"]."'><li class='list-group-item'>". $posts["Title"] ."</li></a>";
-                        }
+                        //get the images associated with the imageIDs
+                        foreach($images as $imageIDs){     
                     ?> 
-                </ul>
+                        <div class="col-md-3">
+                            <div class="card border-dark mb-3">
+                                <center>
+                                    <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>"."<img src='images/square-medium/" . $imageIDs["imagePath"]['Path'] ."' class='img-thumbnail'></a>"; ?>
+                            
+                                    <p> <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"] ."'>".  $imageIDs["imageDetails"]["Title"] ."</a>";?>
+                                    </p>
+                                
+                                    <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"]. "'><button type='button' class='btn btn-warning'>
+                                    View</a>";?>
+                                    </button>
+                                    <button type="button" class="btn btn-secondary">Fav</button>
+                                    <br>
+                                </center>
+                            </div>
+                        </div> <!--end card-deck -->
+                    <?php } ?> <!--end foreach loop -->
+                
             </div>
         </div>
-
-    </div>
 </div>
 
 <?php include 'footer.inc.php'; ?>

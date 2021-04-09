@@ -1,22 +1,39 @@
-<div class="col-md-2" >
-    <div class="card w-75 ml-auto">
-        <div class="card-header" >Continents</div>
-        <ul class="list-group">
-            <?php $dbhandle->get_for_sidebar_continents(); ?>
-        </ul>
+<aside class="col-md-2">
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" >                
+                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                        Continents
+                    </a>
+            </div>
+                <div id="collapseOne" class="collapse" data-parent="#accordion">
+                    <ul class="list-group list-group-flush">
+                        <?php $dbhandle->get_for_sidebar_continents(); ?>
+                    </ul>
+                </div>
 
-        <div class="card-header" >Countries</div>
-        <ul class="list-group">
-        <?php $dbhandle->get_for_sidebar_countries(); ?>
-        </ul>
+            <div class="card-header" >
+                <a class="card-link" data-toggle="collapse" href="#collapseTwo">
+                    Countries
+                </a>
+            </div>
+                <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                    <ul class="list-group list-group-flush">
+                    <?php $dbhandle->get_for_sidebar_countries(); ?>
+                    </ul>
+                </div>
 
-        <div class="card-header" >Cities</div>
-        <ul class="list-group">
-                <?php $dbhandle->get_for_sidebar_cities(); ?>
-        </ul>
+            <div class="card-header" >
+                <a class="card-link" data-toggle="collapse" href="#collapseThree">
+                    Cities
+                </a>
+            </div>
+                <div id="collapseThree" class="collapse" data-parent="#accordion">
+                    <ul class="list-group list-group-flush">
+                            <?php $dbhandle->get_for_sidebar_cities(); ?>
+                    </ul>
+                </div>
+        </div>
     </div>
-</div>
-            
-
-
-
+</aside>
+    
