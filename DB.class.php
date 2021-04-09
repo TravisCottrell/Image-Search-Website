@@ -100,6 +100,25 @@ class DB extends PDO{
         }
         
     }
+
+    public function get_for_PostList(){
+        echo "<h2>Post List</h2>";
+        $sql = "SELECT * FROM travelpost ORDER BY Title";
+        $result = $this->query($sql);
+        while ($row = $result->fetch()) {
+            echo "<li><a href='SinglePost.php?id=" .$row["PostID"]. "'>" . $row["Title"]. "</a></li>"; 
+        }
+    }
+
+    public function get_for_UserList(){
+        echo "<h2>User List</h2>";
+        $sql = "SELECT UID, FirstName, LastName FROM traveluserdetails Order BY FirstName";
+        $result = $this->query($sql);
+        while ($row = $result->fetch()) {
+            $fullname = $row['FirstName'] ." ". $row["LastName"];
+            echo "<li><a href='#'>" . $fullname. "</a></li>"; 
+        }
+    }
     
 }
 

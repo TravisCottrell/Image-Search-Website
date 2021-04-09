@@ -3,9 +3,9 @@
     <div id="accordion">
         <div class="card">
             <div class="card-header" >                
-                    <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                        Continents
-                    </a>
+                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                    Continents
+                </a>
             </div>
                 <div id="collapseOne" class="collapse" data-parent="#accordion">
                     <ul class="list-group list-group-flush">

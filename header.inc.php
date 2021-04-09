@@ -29,7 +29,7 @@
                 </li>
                 
             </ul>
-            <form class="form-inline ml-auto"  action="Part04_Search.php" method="get">
+            <form class="form-inline ml-auto"  action="Search.php" method="get">
                 <div class="form-group">
                     <input type="text" class="form-control" name="filtertext" placeholder="Search">
                     <input class="form-check-input" type="hidden" name="filteroption" id="filtertitle" value="option1" >

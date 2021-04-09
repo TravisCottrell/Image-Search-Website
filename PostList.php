@@ -1,13 +1,6 @@
 <?php 
-
-require_once('config.php'); 
-try {
-   $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
-   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $e) {
-   die( $e->getMessage() );
-}
+require_once("DB.class.php");
+$dbhandle = new DB();
 ?>
 
 
@@ -24,17 +17,40 @@ catch (PDOException $e) {
 <body  >
 <?php include 'header.inc.php'; ?>
 <div class="container">
-    
-    <ul>
-        <h2>Post List</h2>
-        <?php 
-        $sql = "SELECT * FROM travelpost ORDER BY Title";
-        $result = $pdo->query($sql);
-        while ($row = $result->fetch()) {
-            echo "<li><a href='SinglePost.php?id=" .$row["PostID"]. "'>" . $row["Title"]. "</a></li>"; 
-        }
-        ?>
-    </ul>
+    <div class="row">
+        <!-- List form  -->
+            <div class="col" ><br>
+            <div class="row" >
+                <form method="get">
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" name="listoption" id="posts" value="option1" checked>
+                        <label class="form-check-label" for="posts">Post List</label>
+                    </div>
+                    <div class="form-check-inline">
+                        <input class="form-check-input" type="radio" name="listoption" id="users" value="option2">
+                        <label class="form-check-label" for="users">User List</label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Show List</button>
+                </form>
+            </div>
+        <!-- List form end -->
+
+            <div class="row">
+                <ul>
+                    <?php 
+                    if(isset($_GET["listoption"])){
+                        if($_GET["listoption"] == "option1"){
+                            $dbhandle->get_for_PostList();
+                        }else{
+                            $dbhandle->get_for_UserList();
+                        }
+                    }
+                    ?>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php include 'footer.inc.php'; ?>

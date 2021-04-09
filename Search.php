@@ -15,16 +15,13 @@ catch (PDOException $e) {
 
     
     if(isset($_GET["filteroption"])){
-       
-        
-
             if($_GET["filteroption"] == "option1"){
                 if(isset($_GET["filtertext"]) && $_GET["filtertext"] != '' ){
                     $sql = 'SELECT PostID, Title, Message FROM travelpost where Title LIKE "%' . $_GET["filtertext"] . '%"';
                     $result = $pdo->query($sql);
                     while($listview = $result->fetch()){
                         echo '<div class="row ">';
-                        echo '<a href="Part02_SinglePost.php?id='. $listview["PostID"] .'"' . '<h3>' . $listview["Title"] . '</h3></a>';
+                        echo '<a href="SinglePost.php?id='. $listview["PostID"] .'"' . '<h3>' . $listview["Title"] . '</h3></a>';
                         echo '<p>' . $listview["Message"] . '</p>';
                         echo '</div><br>';
                     } 
@@ -42,7 +39,7 @@ catch (PDOException $e) {
                         $replace = "<mark>". $_GET["filtertext"] . "</mark>";
                         $listview["Message"] = str_ireplace($_GET["filtertext"],$replace,$listview["Message"], $i);
                         echo '<div class="row ">';
-                        echo '<a href="Part02_SinglePost.php?id='. $listview["PostID"] .'"' . '<h3>' . $listview["Title"] . '</h3></a>';
+                        echo '<a href="SinglePost.php?id='. $listview["PostID"] .'"' . '<h3>' . $listview["Title"] . '</h3></a>';
                         echo '<p>' . $listview["Message"] . '</p>';
                         echo '</div><br>';
                     }  
@@ -53,19 +50,13 @@ catch (PDOException $e) {
                 }
             }
   
-           
-        
-           
-        
-
-
         if($_GET["filteroption"] == "option3"){
         //get the travel post info 
         $sql = 'SELECT PostID, Title, Message FROM travelpost';
         $result = $pdo->query($sql);
         while($listview = $result->fetch()){
             echo '<div class="row ">';
-            echo '<a href="Part02_SinglePost.php?id='. $listview["PostID"] .'"' . '<h3>' . $listview["Title"] . '</h3></a>';
+            echo '<a href="SinglePost.php?id='. $listview["PostID"] .'"' . '<h3>' . $listview["Title"] . '</h3></a>';
             echo '<p>' . $listview["Message"] . '</p>';
             echo '</div><br>';
         }
@@ -73,25 +64,14 @@ catch (PDOException $e) {
     
     }
 }
-    
-
-
-    
-
 ?>
-
-
 <html>
-<title>About page</title>
+<title>Search page</title>
 <head>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/mystyle.css" />
 </head>
-<style>
-
-</style>
-
 <body  >
     <?php include 'header.inc.php'; ?>
     <div class="container"> <br>
@@ -124,12 +104,8 @@ catch (PDOException $e) {
         </div><br>
         <!-- search form end -->
 
-        <?php
-            printsearch();
-        ?>
-
+        <?php printsearch(); ?>
     </div>
-
     <?php include 'footer.inc.php'; ?>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
