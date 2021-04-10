@@ -58,7 +58,7 @@ if(isset($_GET["id"])){
       // Initialize and add the map
       function initMap() {
         // The location of location
-        var location = { lat: 41.89474, lng: 12.4839 };
+       <?php echo "var location = { lat: " . $cityinfo['Latitude'] ."," ."lng: " .$cityinfo['Longitude']. "};" ; ?>
         // The map, centered at location
         var map = new google.maps.Map(document.getElementById("map"), {
           zoom: 4,
@@ -126,11 +126,9 @@ if(isset($_GET["id"])){
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Country: <?php echo $countryinfo['CountryName']; ?></li>
                             <li class="list-group-item">City: <?php echo $cityinfo['AsciiName']; ?></li>
-                            <li class="list-group-item">Latitude: <?php echo $cityinfo['Latitude']; ?></li>
-                            <li class="list-group-item">Longitude: <?php echo $cityinfo['Longitude']; ?></li>
                         </ul>
-                    </div><br>
-
+                    </div><!-- END Image info Card     -->
+                    <br> 
                     <div class="row"> <!-- map -->
                         <div class="col">
                             <div id="accordion">
@@ -151,7 +149,7 @@ if(isset($_GET["id"])){
                     </div><!-- map -->
 
                 </div>               
-            </div>       <!-- END Image info Card     --> 
+            </div>       
         </div>
         
     </div>
