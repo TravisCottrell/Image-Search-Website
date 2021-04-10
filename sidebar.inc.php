@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header" >                
                 <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                    Continents
+                    Continents <span class="bi bi-caret-down-fill"></span>
                 </a>
             </div>
                 <div id="collapseOne" class="collapse" data-parent="#accordion">
@@ -15,7 +15,7 @@
 
             <div class="card-header" >
                 <a class="card-link" data-toggle="collapse" href="#collapseTwo">
-                    Countries
+                    Countries <span class="bi bi-caret-down-fill"></span>
                 </a>
             </div>
                 <div id="collapseTwo" class="collapse" data-parent="#accordion">
@@ -26,7 +26,7 @@
 
             <div class="card-header" >
                 <a class="card-link" data-toggle="collapse" href="#collapseThree">
-                    Cities
+                    Cities <span class="bi bi-caret-down-fill"></span>
                 </a>
             </div>
                 <div id="collapseThree" class="collapse" data-parent="#accordion">

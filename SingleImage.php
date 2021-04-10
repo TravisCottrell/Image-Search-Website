@@ -46,12 +46,33 @@ if(isset($_GET["id"])){
 }
 
 ?>
-<html>
+
+
+<!DOCTYPE html>
 <title>Single Post</title>
 <head>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/mystyle.css" />    
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of location
+        var location = { lat: 41.89474, lng: 12.4839 };
+        // The map, centered at location
+        var map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 4,
+          center: location,
+        });
+        // The marker, positioned at location
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map,
+        });
+      }
+    </script>
+
+
 </head>
 
 <body>
@@ -62,67 +83,85 @@ if(isset($_GET["id"])){
             <h2><?php echo $imageinfo["Title"]; ?></h2>                            
             <p> <?php echo "By: " . $userinfo["FirstName"]." ". $userinfo["LastName"]; ?> </p>
         </div>           
-            <div class="col-md-8">
-                <a href="#myModal" role="button" data-toggle="modal">
-                    <img src="images/medium/<?php echo $imageinfo['Path']?>" class="rounded" >
-                </a>
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
-                        <div class="modal-dialog modal-xl"  role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"><?php echo $imageinfo["Title"]; ?>
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="container">
-                                        <img src="images/large/<?php echo $imageinfo['Path']?>" class="rounded" >
+        <div class="col-md-8">
+            <a href="#myModal" role="button" data-toggle="modal">
+                <img src="images/medium/<?php echo $imageinfo['Path']?>" class="rounded" >
+            </a>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog modal-xl"  role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><?php echo $imageinfo["Title"]; ?></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <img src="images/large/<?php echo $imageinfo['Path']?>" class="rounded" >
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">    
+            <div class="card"> <!-- START Rating Card -->
+                <div class="card-header" > 
+                    Rating
+                </div>           
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><?php echo $ratinginfo["avg(Rating)"]."(". $ratinginfo["count(ImageID)"]. " votes)";  ?></li>
+                </ul>                          
+            </div> <!-- END Rating Card -->
+            <br>
+            <div class="row"> <!-- START Image info Card -->
+                <div class="col">                          
+                    <div class="card">
+                        <div class="card-header" >Image Details</div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Country: <?php echo $countryinfo['CountryName']; ?></li>
+                            <li class="list-group-item">City: <?php echo $cityinfo['AsciiName']; ?></li>
+                            <li class="list-group-item">Latitude: <?php echo $cityinfo['Latitude']; ?></li>
+                            <li class="list-group-item">Longitude: <?php echo $cityinfo['Longitude']; ?></li>
+                        </ul>
+                    </div><br>
+
+                    <div class="row"> <!-- map -->
+                        <div class="col">
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header" >
+                                        <a class="card-link" data-toggle="collapse" href="#collapseMap">
+                                            Map <span class="bi bi-caret-down-fill"></span>
+                                        </a>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                    
+                                    <div id="collapseMap" class="collapse" data-parent="#accordion">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><div id="map"></div></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-            </div>
+                    </div><!-- map -->
 
-            <div class="col-md-4">    
-                <div class="card"> <!-- START Rating Card -->
-                    <div class="card-header" > 
-                        Rating
-                    </div>           
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><?php echo $ratinginfo["avg(Rating)"]."(". $ratinginfo["count(ImageID)"]. " votes)";  ?></li>
-                            </ul>                          
-                </div> <!-- END Rating Card -->
-                <br>
-                <div class="row"> <!-- START Image info Card -->
-                    <div class="col">                          
-                           <div class="card">
-                                <div class="card-header" >
-                                    Image Details
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Country: <?php echo $countryinfo['CountryName']; ?></li>
-                                    <li class="list-group-item">City: <?php echo $cityinfo['AsciiName']; ?></li>
-                                    <li class="list-group-item">Latitude: <?php echo $cityinfo['Latitude']; ?></li>
-                                    <li class="list-group-item">Longitude: <?php echo $cityinfo['Longitude']; ?></li>
-                                </ul>
-                            </div>
-                        </div>               
-                </div>       <!-- END Image info Card     --> 
-            </div>
+                </div>               
+            </div>       <!-- END Image info Card     --> 
+        </div>
+        
     </div>
 </div>
 
-<?php include 'footer.inc.php'; ?>
+ <?php include 'footer.inc.php'; ?> 
 
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous">
-</script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGJYrKkzXNu85MzeBlb0-6qirxXoMuwsA&callback=initMap"> </script>
 
 </body>
 
