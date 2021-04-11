@@ -1,6 +1,7 @@
 <?php
 require_once('config.php'); 
 
+
 class DB extends PDO{
  
     public function __construct(){
@@ -80,7 +81,7 @@ class DB extends PDO{
             $countrynames = $result->fetch();
             
             if(isset($countrynames["CountryName"])){
-                echo "<li class='list-group-item'>"."<a href='#'>".$countrynames["CountryName"]."</a>"."</li>";
+                echo "<li class='list-group-item'>"."<a href='DisplaySingleCountry.php?ISO=".$country["CountryCodeISO"]."'>".$countrynames["CountryName"]."</a>"."</li>";
             }   
         }
     }
@@ -94,7 +95,7 @@ class DB extends PDO{
             $citynames = $result->fetch();
             
             if(isset($citynames["AsciiName"])){
-                echo "<li class='list-group-item'>"."<a href='#'>".$citynames["AsciiName"]."</a>"."</li>";
+                echo "<li class='list-group-item'>"."<a href='DisplaySingleCity.php?ID=".$city["CityCode"] ."'>".$citynames["AsciiName"]."</a>"."</li>";
             }   
         }
         
@@ -129,7 +130,37 @@ class DB extends PDO{
         return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
     
+    public function get_for_SingleCity_cityinfo($ID){
+        $sql = "SELECT * FROM geocities WHERE GeoNameID = $ID";
+        return $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function get_for_SingleCity_imagedetails($CityID){
+        $sql = "SELECT * FROM travelimagedetails WHERE CityCode = $CityID";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);  
+    }
+
+    public function get_for_SingleCity_image($ImageID){
+        $sql = "SELECT * FROM travelimage WHERE ImageID = $ImageID";
+        return $this->query($sql)->fetch(PDO::FETCH_ASSOC);  
+    }
+    
+    public function get_for_SingleCountry_countryinfo($ISO){
+        $sql = "SELECT * FROM geocountries WHERE ISO = '$ISO'";
+        return $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function get_for_SingleCountry_imagedetails($ISO){
+        $sql = "SELECT * FROM travelimagedetails WHERE CountryCodeISO = '$ISO'";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);  
+    }
+
+    public function get_for_SingleCountry_image($ImageID){
+        $sql = "SELECT * FROM travelimage WHERE ImageID = $ImageID";
+        return $this->query($sql)->fetch(PDO::FETCH_ASSOC);  
+    }
+    
+
+
 }
-
-
 ?>

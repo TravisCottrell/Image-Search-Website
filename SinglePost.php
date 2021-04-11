@@ -2,8 +2,9 @@
 require_once("DB.class.php");
 $dbhandle = new DB();
 
+
 if(isset($_GET["id"])){
-     //get the UID from database 
+     //get the UID from database with PostID 
     $travelPost = $dbhandle->get_for_singlepost_UID($_GET["id"]);
 
      //use UID to get the traveluserdetils
