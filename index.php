@@ -71,7 +71,7 @@ img {vertical-align: middle;}
 
 <div class="mySlides fade">
   <div class="numbertext">1 / 3</div>
-  <img class="image_caro" src="">
+  <img class="image_caro" src="http://localhost:7882/xampp/WP2FinalProject/images/img_caros/station-839208_1920.jpg">
   <div class="text"><h3 >Be Prepared</h3></div>
     <div class="refcenter">
         
@@ -87,7 +87,7 @@ img {vertical-align: middle;}
 
 <div class="mySlides fade">
   <div class="numbertext">2 / 3</div>
-  <img class="image_caro" src="">
+  <img class="image_caro" src="http://localhost:7882/xampp/WP2FinalProject/images/img_caros/canal-1209808_1920.jpg">
   <div class="text"><h3 >To Travel The World</h3></div>
    <div class="refcenter">
         
@@ -103,7 +103,7 @@ img {vertical-align: middle;}
 
 <div class="mySlides fade">
   <div class="numbertext">3 / 3</div>
-  <img class="image_caro" src="">
+  <img class="image_caro" src="http://localhost:7882/xampp/WP2FinalProject/images/img_caros/bora-bora-3023437_1920.jpg">
   <div class="text" ><h3 >In a Digital Manner</h3></div>
    <div class="refcenter">
         

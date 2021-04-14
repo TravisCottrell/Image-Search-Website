@@ -159,8 +159,61 @@ class DB extends PDO{
         $sql = "SELECT * FROM travelimage WHERE ImageID = $ImageID";
         return $this->query($sql)->fetch(PDO::FETCH_ASSOC);  
     }
-    
+    //////////////////////////////////////////////
+    //////////////////////////////////////////////
+    public function get_for_browse_continents(){
+         //continents 
+        $continent_code = NULL;
+        $sql = 'SELECT * FROM geocontinents';
+        $continents = $this->query($sql);
+        while($continent = $continents->fetch()){
+            echo "<option value=". $continent_code ." ". $continent["ContinentCode"] ."> ". $continent["ContinentName"] ." </option>";
+        }
+    }
 
+    public function get_for_continent_code($continent_code){
+        //use Continent name as select option value
+        $sql = "SELECT * FROM `geocountries` WHERE Continent = '$continent_code'";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);     
+    }
+
+    public function get_for_browse_countries(){
+        $country_name = NULL;
+        $sql = "SELECT * from travelimagedetails GROUP by CountryCodeISO";
+        $countrycodes = $this->query($sql);
+        while($country = $countrycodes->fetch()){
+            $sql = "select * from geocountries where ISO ='" . $country["CountryCodeISO"]. "'";
+            $result = $this->query($sql);
+            $countrynames = $result->fetch();
+            echo "<option value=". $country_name ." ". $countrynames["ISO"] ."> ". $countrynames["CountryName"] ." </option>";
+        } 
+    }
+
+    public function get_browse_country_name($country_name) {
+        $sql = "SELECT * FROM 'geocountries' WHERE CountryName = '$country_name' ";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+    }
+
+    public function get_browse_country_image($country_code_iso) {
+        $sql = "SELECT * FROM `travelimagedetails` WHERE CountryCodeISO = '$country_code_iso'";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+    }
+
+    public function get_country_img_by_Imageid($ImageID) {
+        $sql = "SELECT * FROM `travelimage` WHERE ImageID = '$ImageID'";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+    }
+
+    public function get_all_images() {
+        $sql = "SELECT travelimagedetails.Title, travelimage.Path, travelimagedetails.ImageID FROM travelimagedetails, travelimage WHERE travelimagedetails.ImageID = travelimage.ImageID";
+        $result = $this->query($sql);
+        while ($row = $result->fetch()) {
+            echo '<div class="card col-md-3 mb-1">';
+            echo '<center><p><a href="SingleImage.php?id="'.$row['ImageID'].'"> '.$row['Title'].'</a></p></center>';
+            echo '<center><a href="SingleImage.php?id="'.$row['ImageID'].'"><img src="images/square-medium/'.$row['Path'].'" class="img-thumbnail"></a></center>';
+            echo '</div>';
+        }
+    }
 
 }
 ?>

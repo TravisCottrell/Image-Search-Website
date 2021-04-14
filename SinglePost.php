@@ -109,7 +109,7 @@ if(isset($_GET["id"])){
                                     </p>
 
                                     <!-- view button with link -->
-                                    <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"]. "'><button type='button' class='btn btn-warning'>
+                                    <?php echo "<a href='SingleImage.php?id=" .$imageIDs["imagePath"]["ImageID"]. "'><button type='button' class='btn btn-dark'>
                                     View</a>";?>
                                     </button>
                                     <button type="button" class="btn btn-secondary">Fav</button>

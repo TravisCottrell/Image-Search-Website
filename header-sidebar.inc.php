@@ -22,6 +22,7 @@
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="caret"></span></a>
                     <ul class="dropdown-menu" >
                         <li class="dropdown-item"><a href="PostList.php">Post/User List</a></li>
+                        <li class="dropdown-item"><a href="browse-images.php">Browse</a></li>
                         <li class="dropdown-item"><a href="SinglePost.php?id=20">Single Post</a> </li>
                         <li class="dropdown-item"><a href="SingleImage.php?id=53">Single Image</a> </li>
                         <li class="dropdown-item"><a href="Search.php">Search</a></li>
