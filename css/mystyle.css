@@ -12,6 +12,8 @@ body {
 	text-align: center;
 }
 
+
+
 .footer > .container-fluid > a{
 	color: white;
 }
@@ -59,7 +61,7 @@ ul {
 
 #caro-size{
 	 width:100%;
-	 height: 32rem;
+	 height: 900px !important;
 }
 
 .carousel-indicators li{
