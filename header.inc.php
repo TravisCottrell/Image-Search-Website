@@ -20,7 +20,7 @@
     <nav class="navbar navbar-expand-md" >
         <div class="collapse navbar-collapse">
             <ul class="nav nav-tabs mr-auto"> 
-                <li class="navbar-brand" >Welcome <?php echo strstr($name, '@', true); ?></li>
+                <li class="navbar-brand" id="nav-bar-welcome" >Welcome <?php echo strstr($name, '@', true); ?></li>
                 <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="AboutUs.php" class="nav-link">About</a></li>
                 <li class="dropdown nav-item" > 
@@ -48,6 +48,13 @@
     <head>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/mystyle.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/mystyle.css"/>
     
     </head>

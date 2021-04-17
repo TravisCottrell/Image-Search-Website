@@ -5,17 +5,13 @@ $dbhandle = new DB();
 <html>
 <title>Favorites</title>
 <body>
-  <?php include 'header.inc.php'; ?>
-
+<?php include'header.inc.php'; ?>
 <div class="container">
     <div class="row">
         <div class="co-md-12" >
           <h2>Your favorite posts and pictures</h2>
         </div>
     </div>
-
-
-
     <div class="row">
       
         <?php 
@@ -25,13 +21,10 @@ $dbhandle = new DB();
               $_SESSION['favorites'] = $fav_array;
             }
           
-
-
           array_push($_SESSION['favorites'], $user_id);
 
           $clean_array = array_unique($_SESSION['favorites']);
-         
-          
+           
           foreach($clean_array as $prep_array) {
             $prep_fav_img = $dbhandle->get_img_info_for_fav($prep_array);
             $prep_fav_img_info = $dbhandle->get_img_title_for_fav($prep_array);
@@ -47,7 +40,7 @@ $dbhandle = new DB();
                     $fav_img_id = $fav_img_out['ImageID'];
                     echo '<center><a href="SingleImage.php?id='.$fav_img_id.'"><img src="images/square-medium/'.$fav_img.'" class="rounded"></a></center>';
                     echo '<form action="favorites.php" method="get">';
-                    echo '<center><button type="submit" name="submit" value="'.$fav_img_id.'" class="btn btn-outline-danger">Remove From Favorites</button></center>';
+                    echo '<center><button type="submit" name="submit" value="'.$fav_img_id.'" class="btn btn-sm btn-outline-danger">Remove From Favorites</button></center>';
                     echo '</form>';
                     echo '</div>';
                     echo '</div>';
@@ -55,20 +48,16 @@ $dbhandle = new DB();
                        if (($key = array_search($_GET['submit'], $_SESSION['favorites'])) !== false) {
                             unset($_SESSION['favorites'][$key]);
                             header("Refresh:0"); 
-                            break;
+                            
                         }
                       }
                     }
                 }
             }
-            
-        
         ?>
       
     </div>
         
-
-
 </div>
 
   <?php include 'footer.inc.php'; ?>
