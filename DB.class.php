@@ -160,9 +160,10 @@ class DB extends PDO{
         return $this->query($sql)->fetch(PDO::FETCH_ASSOC);  
     }
     //////////////////////////////////////////////
+    //browse-images.php functions
     //////////////////////////////////////////////
     public function get_for_browse_continents(){
-         //continents 
+         //dropdown bar select options based on Continent selection by the user
         $continent_code = NULL;
         $sql = 'SELECT * FROM geocontinents';
         $continents = $this->query($sql);
@@ -178,6 +179,7 @@ class DB extends PDO{
     }
 
     public function get_for_browse_countries(){
+        //dropdown bar options for the country selection by the user
         $country_name = NULL;
         $sql = "SELECT * from travelimagedetails GROUP by CountryCodeISO";
         $countrycodes = $this->query($sql);
@@ -190,29 +192,58 @@ class DB extends PDO{
     }
 
     public function get_browse_country_name($country_name) {
+        //query for countries that share the country name selected
         $sql = "SELECT * FROM 'geocountries' WHERE CountryName = '$country_name' ";
         return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
 
     public function get_browse_country_image($country_code_iso) {
+        //query travelimages to find selections based off passed country iso
         $sql = "SELECT * FROM `travelimagedetails` WHERE CountryCodeISO = '$country_code_iso'";
         return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
 
     public function get_country_img_by_Imageid($ImageID) {
+        //query for image paths from the passed ImageID
         $sql = "SELECT * FROM `travelimage` WHERE ImageID = '$ImageID'";
         return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
 
     public function get_all_images() {
+        //query to output all images that have an existing image id and path
         $sql = "SELECT travelimagedetails.Title, travelimage.Path, travelimagedetails.ImageID FROM travelimagedetails, travelimage WHERE travelimagedetails.ImageID = travelimage.ImageID";
         $result = $this->query($sql);
         while ($row = $result->fetch()) {
             echo '<div class="card col-md-3 mb-1">';
-            echo '<center><p><a href="SingleImage.php?id="'.$row['ImageID'].'"> '.$row['Title'].'</a></p></center>';
-            echo '<center><a href="SingleImage.php?id="'.$row['ImageID'].'"><img src="images/square-medium/'.$row['Path'].'" class="img-thumbnail"></a></center>';
+            echo '<center><p><a href="SingleImage.php?id='.$row['ImageID'].'"> '.$row['Title'].'</a></p></center>';
+            echo '<center><a href="SingleImage.php?id='.$row['ImageID'].'"><img src="images/square-medium/'.$row['Path'].'" class="img-thumbnail"></a></center>';
             echo '</div>';
         }
+    }
+
+    //////////////////////////////////////////////
+    //login.php functions
+    //////////////////////////////////////////////
+    public function get_for_user_name($UserName) {
+        $sql = "SELECT * FROM `traveluser` WHERE UserName = '$UserName' AND Pass = 'abcd1234'";
+        $result = $this->query($sql);
+        if($result == 0) {
+            echo "this user does not exist";
+        } else {
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+          }
+    }
+    //////////////////////////////////////////////
+    //favorites.php functions
+    //////////////////////////////////////////////
+    public function get_img_info_for_fav($ImgID) {
+        $sql = "SELECT * FROM `travelimage` WHERE ImageID = '$ImgID'";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+    }
+
+    public function get_img_title_for_fav($ImgID) {
+        $sql = "SELECT * FROM `travelimagedetails` WHERE ImageID = '$ImgID'";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
 
 }

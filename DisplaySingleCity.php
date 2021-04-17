@@ -7,14 +7,10 @@ $cityinfo = $dbhandle->get_for_SingleCity_cityinfo($_GET["ID"]);
 $imagesdetails = $dbhandle->get_for_SingleCity_imagedetails($_GET["ID"]);
 }
 
-
 ?>
 <html>
 <title>Single Post</title>
 <head>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/mystyle.css" />
     <script>
       // Initialize and add the map
       function initMap() {

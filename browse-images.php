@@ -7,12 +7,7 @@ $dbhandle = new DB();
 
 // $search_query = $_POST['q']??false;
 ?>
-
-<head>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/mystyle.css" />
-</head>
+<title>Images</title>
 
 <body>
 <?php include 'header-sidebar.inc.php'; ?>
@@ -31,7 +26,7 @@ $dbhandle = new DB();
     </div>
     <div class="row">
         <div class="col-md-12">     
-          <form class="form-inline" action="browse-images.php" method="post">
+          <form class="form-inline" action="browse-images.php" method="get">
             <div class="form-group">
                 <select class="form-control" name="continent_code">
                     <option value="<?php $dbhandle->get_for_browse_continents(); ?>">Filter by Continent</option>
@@ -58,11 +53,10 @@ $dbhandle = new DB();
     
    <div class="row">  
     <?php
-    if(isset($_POST['submit'])) {
-        $selected_cont = $_POST['continent_code'];
+    if(isset($_GET['submit'])) {
+        $selected_cont = $_GET['continent_code'];
         // echo $selected_cont;   
         $pass_continentCode = $dbhandle->get_for_continent_code($selected_cont);
-        echo '<br>';
         foreach ($pass_continentCode as $value) {
             $CountryNames = $value['ISO'];
             // print_r($CountryNames); gives array of all countires on a specific continent
@@ -70,10 +64,10 @@ $dbhandle = new DB();
             foreach ($img_out_on_iso as $iso_val) {
                 $spec_cont_img = $iso_val['ImageID'];
                 echo '<div class="card col-md-3 mb-1">';
-                echo '<center><p><a href="SingleImage.php?id="'.$spec_cont_img.'"> '.$iso_val['Title'].'</a></p></center>';
+                echo '<center><p><a href="SingleImage.php?id='.$spec_cont_img.'"> '.$iso_val['Title'].'</a></p></center>';
                 $img_output = $dbhandle->get_country_img_by_Imageid($iso_val['ImageID']);
                     foreach ($img_output as $img_links) {
-                    echo '<center><a href="SingleImage.php?id="'.$img_links['ImageID'].'"><img src="images/square-medium/'.$img_links['Path'].'" class="img-thumbnail"></a></center>'; 
+                    echo '<center><a href="SingleImage.php?id='.$img_links['ImageID'].'"><img src="images/square-medium/'.$img_links['Path'].'" class="img-thumbnail"></a></center>'; 
                     echo '</div>';
                     }
             }
@@ -81,30 +75,30 @@ $dbhandle = new DB();
         }
     }
 
-    if(isset($_POST['submit_2'])) {    
-        $selected_country = $_POST['country_code'];
+    if(isset($_GET['submit_2'])) {    
+        $selected_country = $_GET['country_code'];
         $selected_country;
         $selected_country_data = $dbhandle->get_browse_country_image($selected_country);
         foreach ($selected_country_data as $single_output) {
             $img_id = $single_output['ImageID'];
             echo '<div class="card col-md-3 mb-1">';
-            echo '<center><p><a href="SingleImage.php?id="'.$img_id.'"> '.$single_output['Title'].'</a></p></center>';
+            echo '<center><p><a href="SingleImage.php?id='.$img_id.'"> '.$single_output['Title'].'</a></p></center>';
             $img_output = $dbhandle->get_country_img_by_Imageid($single_output['ImageID']);
             foreach ($img_output as $img_links) {
-            echo '<center><a href="SingleImage.php?id="'.$img_links['ImageID'].'"><img src="images/square-medium/'.$img_links['Path'].'" class="img-thumbnail"></a></center>'; 
+            echo '<center><a href="SingleImage.php?id='.$img_links['ImageID'].'"><img src="images/square-medium/'.$img_links['Path'].'" class="img-thumbnail"></a></center>'; 
             echo '</div>';
             }
         }
     }
     
-    if(isset($_POST['submit_3'])) {  
+    if(isset($_GET['submit_3'])) {  
     $dbhandle->get_all_images();
     }
     ?>                    
     </div>   
 </div>
 
-<?php include 'footer.inc.php'; ?>
+<?php include 'footer-sidebar.inc.php'; ?>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>

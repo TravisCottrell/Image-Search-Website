@@ -48,12 +48,8 @@ if(isset($_GET["id"])){
 ?>
 
 
-<!DOCTYPE html>
-<title>Single Post</title>
-<head>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/mystyle.css" />    
+<title>Single Image</title>
+<head>  
     <script>
       // Initialize and add the map
       function initMap() {
@@ -71,8 +67,6 @@ if(isset($_GET["id"])){
         });
       }
     </script>
-
-
 </head>
 
 <body>

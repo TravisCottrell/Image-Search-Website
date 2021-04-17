@@ -12,8 +12,6 @@ body {
 	text-align: center;
 }
 
-
-
 .footer > .container-fluid > a{
 	color: white;
 }
@@ -36,8 +34,6 @@ ul {
 	/* The width is the width of the web page */
   }
 
-
-
 #topheader{
 	background-color: rgb(69, 36, 120);
 }
@@ -51,9 +47,23 @@ ul {
 	background-color: lightgray;
 }
 
-
-.midcol {
+.midcol{
   background-color: #ddd;
 }
 
+.carousel-caption{
+    transform: translate(-50%);
+    bottom:initial;
+    top:25%;
+}
 
+#caro-size{
+	 width:100%;
+	 height: 32rem;
+}
+
+.carousel-indicators li{
+  width: 10px;
+  height: 10px; 
+  border-radius: 100%; 
+}

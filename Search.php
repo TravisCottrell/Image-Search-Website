@@ -1,7 +1,5 @@
 <?php
 
-
-
 function printsearch(){
 
     require_once('config.php'); 
@@ -66,13 +64,9 @@ catch (PDOException $e) {
 }
 ?>
 <html>
-<title>Search page</title>
-<head>
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/mystyle.css" />
-</head>
-<body  >
+<title>Search</title>
+
+<body>
     <?php include 'header.inc.php'; ?>
     <div class="container"> <br>
         <div class="row">
