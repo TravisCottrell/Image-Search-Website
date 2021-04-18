@@ -5,13 +5,13 @@ $dbhandle = new DB();
 if(isset($_GET["ISO"])){
     $countryinfo = $dbhandle->get_for_SingleCountry_countryinfo($_GET["ISO"]);
     $imagesdetails = $dbhandle->get_for_SingleCountry_imagedetails($_GET["ISO"]);
-  
 }
+
 
 
 ?>
 <html>
-<title>Single Post</title>
+<title>Single Country</title>
 
 <body>
     <?php include 'header-sidebar.inc.php'; ?>
@@ -70,7 +70,7 @@ if(isset($_GET["ISO"])){
         </div>
         
 
-    <?php include 'footer.inc.php'; ?>
+    <?php include 'footer-sidebar.inc.php'; ?>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>

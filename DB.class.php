@@ -18,7 +18,9 @@ class DB extends PDO{
     
         return $stmt->fetchAll();
     }
-
+    //////////////////////////////////////////////
+    //SinglePost.php functions
+    //////////////////////////////////////////////
     public function get_for_singlepost_UID($id){
         //get the UID from travelpost
         $sql = 'SELECT * FROM travelpost WHERE PostID ="'. $id .'"';
@@ -62,7 +64,9 @@ class DB extends PDO{
 
        return $image;
     }
-
+    //////////////////////////////////////////////
+    //sidebar functions
+    //////////////////////////////////////////////
     public function get_for_sidebar_continents(){
          //continents 
         $sql = 'SELECT * FROM geocontinents';
@@ -100,7 +104,9 @@ class DB extends PDO{
         }
         
     }
-
+    //////////////////////////////////////////////
+    // post/userlists.php functions
+    //////////////////////////////////////////////
     public function get_for_PostList(){
         echo "<h2>Post List</h2>";
         $sql = "SELECT * FROM travelpost ORDER BY Title";
@@ -119,7 +125,9 @@ class DB extends PDO{
             echo "<li><a href='DisplaySIngleUser.php?UID=".$row["UID"]."'>" . $fullname. "</a></li>"; 
         }
     }
-
+    //////////////////////////////////////////////
+    //DisplaySingleUser.php functions
+    //////////////////////////////////////////////
     public function get_for_SingleUser_info($UID){
         $sql = "SELECT * FROM traveluserdetails WHERE UID = $UID";
         return $this->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -129,9 +137,11 @@ class DB extends PDO{
         $sql = "SELECT * FROM travelimage WHERE UID = $UID";
         return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
-    
-    public function get_for_SingleCity_cityinfo($ID){
-        $sql = "SELECT * FROM geocities WHERE GeoNameID = $ID";
+        //////////////////////////////////////////////
+    //displaySingleCity.php functions
+    //////////////////////////////////////////////
+    public function get_for_SingleCity_cityinfo($cityID){
+        $sql = "SELECT * FROM geocities WHERE GeoNameID = $cityID";
         return $this->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -144,7 +154,9 @@ class DB extends PDO{
         $sql = "SELECT * FROM travelimage WHERE ImageID = $ImageID";
         return $this->query($sql)->fetch(PDO::FETCH_ASSOC);  
     }
-    
+    //////////////////////////////////////////////
+    //displaySingleCountry.php functions
+    //////////////////////////////////////////////
     public function get_for_SingleCountry_countryinfo($ISO){
         $sql = "SELECT * FROM geocountries WHERE ISO = '$ISO'";
         return $this->query($sql)->fetch(PDO::FETCH_ASSOC);
@@ -246,5 +258,101 @@ class DB extends PDO{
         return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
 
+    //////////////////////////////////////////////
+    //search.php functions
+    //////////////////////////////////////////////
+
+    public function get_for_search_posts($filtertext){
+        $sql = 'SELECT PostID, Title, Message FROM travelpost where Title LIKE "%' . $filtertext . '%"';
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+    }
+
+
+    //search images options
+    public function get_for_search_imagestitle($filtertext){
+        $sql = 'SELECT * FROM travelimagedetails where Title LIKE "%' . $filtertext . '%"';
+        $images = $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+        if($images == null){
+            return null;
+        }
+
+        $sql = 'SELECT * FROM (travelimage inner join travelimagedetails on travelimage.ImageID = travelimagedetails.ImageID)';
+        $result = $this->query($sql);
+        while($travelimages = $result->fetch(PDO::FETCH_ASSOC)){
+            foreach($images as $image){
+                if($travelimages["ImageID"] == $image["ImageID"]){
+                    $imageinfo[] = $travelimages;
+                }
+            }
+        } 
+        return $imageinfo;
+    }
+
+    public function get_for_search_imagescity($cityID){
+        $sql = 'SELECT * FROM travelimagedetails where CityCode ="' .$cityID . '"';
+        $images = $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+        if($images == null){
+            return null;
+        }
+
+        $sql = 'SELECT * FROM (travelimage inner join travelimagedetails on travelimage.ImageID = travelimagedetails.ImageID)';
+        $result = $this->query($sql);
+        while($travelimages = $result->fetch(PDO::FETCH_ASSOC)){
+            foreach($images as $image){
+                if($travelimages["ImageID"] == $image["ImageID"]){
+                    $imageinfo[] = $travelimages;
+                }
+            }
+        } 
+        return $imageinfo;
+    }
+
+    public function get_for_search_imagescountry($countryID){
+        $sql = 'SELECT * FROM travelimagedetails where CountryCodeISO ="' .$countryID . '"';
+        $images = $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+        if($images == null){
+            return null;
+        }
+
+        $sql = 'SELECT * FROM (travelimage inner join travelimagedetails on travelimage.ImageID = travelimagedetails.ImageID)';
+        $result = $this->query($sql);
+        while($travelimages = $result->fetch(PDO::FETCH_ASSOC)){
+            foreach($images as $image){
+                if($travelimages["ImageID"] == $image["ImageID"]){
+                    $imageinfo[] = $travelimages;
+                }
+            }
+        } 
+        return $imageinfo;
+    }
+
+    //dropdown for cities with images
+    public function get_for_search_citiesdropdown(){
+       
+        $sql = "select * from travelimagedetails GROUP by CityCode";
+        $citycodes = $this->query($sql);
+        while($city = $citycodes->fetch(PDO::FETCH_ASSOC)){
+            $sql = "select * from geocities where GeoNameID ='" . $city["CityCode"]. "'";
+            $result = $this->query($sql);
+            $citynames[] = $result->fetch(PDO::FETCH_ASSOC);
+        }
+        
+        return $citynames;
+       
+    }
+
+        //dropdown for countries with images
+        public function get_for_search_countriesdropdown(){
+            $sql = "select * from travelimagedetails GROUP by CountryCodeISO";
+            $countrycodes = $this->query($sql);
+            while($country = $countrycodes->fetch(PDO::FETCH_ASSOC)){
+                $sql = "select * from geocountries where ISO ='" . $country["CountryCodeISO"]. "'";
+                $result = $this->query($sql);
+                $countrynames[] = $result->fetch(PDO::FETCH_ASSOC);
+            }
+            
+            return $countrynames;
+           
+        }
 }
 ?>

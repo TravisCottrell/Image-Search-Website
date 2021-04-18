@@ -9,7 +9,7 @@ $imagesdetails = $dbhandle->get_for_SingleCity_imagedetails($_GET["ID"]);
 
 ?>
 <html>
-<title>Single Post</title>
+<title>Single City</title>
 <head>
     <script>
       // Initialize and add the map
@@ -101,7 +101,7 @@ $imagesdetails = $dbhandle->get_for_SingleCity_imagedetails($_GET["ID"]);
         </div>
         
 
-    <?php include 'footer.inc.php'; ?>
+    <?php include 'footer-sidebar.inc.php'; ?>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
