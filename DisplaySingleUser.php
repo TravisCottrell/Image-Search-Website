@@ -43,19 +43,42 @@ if(isset($_GET["UID"])){
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Country: <?php echo $userinfo["Country"];?>
+                                    Country: 
+                                    <?php 
+                                        echo $userinfo["Country"];
+                                    ?>       
                                 </li>
                                 <li class="list-group-item">
-                                    City: <?php echo $userinfo["City"]; ?>
+                                    City: 
+                                    <?php
+                                        echo $userinfo["City"]; 
+                                    ?>
                                  </li>
                                 <li class="list-group-item">
-                                    Address: <?php echo $userinfo["Address"];?>
+                                    Address:
+                                    <?php 
+                                        if($userinfo["Privacy"] == "1"){
+                                        echo $userinfo["Address"];
+                                        }else{ echo "hidden";}
+                                    ?>
                                 </li>
                                 <li class="list-group-item">
-                                    Email: <?php echo $userinfo["Email"];?>
+                                    Email: 
+                                    <?php    
+                                        if($userinfo["Privacy"] == "1"){
+                                            echo $userinfo["Email"];
+                                        }else{ echo "hidden";}    
+                                    ?>                                    
+                                        
                                 </li>
                                 <li class="list-group-item">
-                                    Phone: <?php echo $userinfo["Phone"];?>
+                                    Phone: 
+                                    <?php    
+                                        if($userinfo["Privacy"] == "1"){
+                                            echo $userinfo["Phone"]; 
+                                        }else{ echo "hidden";} 
+                                    ?>                                      
+                                        
                                 </li>
                             </ul>
                         </div>

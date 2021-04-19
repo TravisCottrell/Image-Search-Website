@@ -15,14 +15,6 @@ if(isset($_GET["id"])){
     
     //get the imagesIDs associated with the postID
     $images = $dbhandle->get_for_singlepost_related_images($_GET["id"]);
-   
-//     //check if the query was succesful
-//     $count = $result->rowCount();
-//     if($count  <= 0){
-//         // redirect to error page if query wasn't succesful 
-//         header("Location: error.php");
-//         exit();
-//     }
 }
 ?>
 

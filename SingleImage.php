@@ -75,7 +75,7 @@ if(isset($_GET["id"])){
     <div class="row">
         <div class="col-md-12">
             <h2><?php echo $imageinfo["Title"]; ?></h2>                            
-            <p> <?php echo "By: " . $userinfo["FirstName"]." ". $userinfo["LastName"]; ?> </p>
+            <p>By: <?php echo  "<a href='DisplaySIngleUser.php?UID=".$userinfo["UID"]."'>" . $userinfo["FirstName"]." ". $userinfo["LastName"]; ?> </p>
         </div>           
         <div class="col-md-8">
             <a href="#myModal" role="button" data-toggle="modal">
@@ -118,8 +118,8 @@ if(isset($_GET["id"])){
                     <div class="card">
                         <div class="card-header" >Image Details</div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Country: <?php echo $countryinfo['CountryName']; ?></li>
-                            <li class="list-group-item">City: <?php echo $cityinfo['AsciiName']; ?></li>
+                            <li class="list-group-item">Country: <?php echo "<a href='DisplaySingleCountry.php?ISO=".$countryinfo["ISO"]."'>".$countryinfo["CountryName"]."</a>"; ?></li>
+                            <li class="list-group-item">City: <?php echo "<a href='DisplaySingleCity.php?ID=".$cityinfo["GeoNameID"] ."'>". $cityinfo['AsciiName']."</a>"; ?></li>
                         </ul>
                     </div><!-- END Image info Card     -->
                     <br> 

@@ -60,7 +60,7 @@ $imagesdetails = $dbhandle->get_for_SingleCity_imagedetails($_GET["ID"]);
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Country: <?php echo $cityinfo["CountryCodeISO"];?>
+                                    Country: <?php echo "<a href='DisplaySingleCountry.php?ISO=".$cityinfo["CountryCodeISO"]."'>".$cityinfo["CountryCodeISO"]."</a>";?>
                                 </li>
                                 <li class="list-group-item">
                                     Population: <?php echo $cityinfo["Population"]; ?>
