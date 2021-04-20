@@ -69,7 +69,7 @@ class DB extends PDO{
     //////////////////////////////////////////////
     public function get_for_sidebar_continents(){
          //continents 
-        $sql = 'SELECT * FROM geocontinents';
+        $sql = 'SELECT * FROM geocontinents Order By ContinentName';
         $continents = $this->query($sql);
         while($continent = $continents->fetch()){
             if($continent["ContinentCode"] != "AN" && $continent["ContinentCode"] != "AS" && $continent["ContinentCode"] != "OC" && $continent["ContinentCode"] != "SA"){
@@ -79,7 +79,7 @@ class DB extends PDO{
     }
 
     public function get_for_sidebar_countries(){
-        $sql = "select * from travelimagedetails GROUP by CountryCodeISO";
+        $sql = "select * from travelimagedetails GROUP by CountryCodeISO ";
         $countrycodes = $this->query($sql);
         while($country = $countrycodes->fetch()){
             $sql = "select * from geocountries where ISO ='" . $country["CountryCodeISO"]. "'";
@@ -265,14 +265,14 @@ class DB extends PDO{
     //////////////////////////////////////////////
 
     public function get_for_search_posts($filtertext){
-        $sql = 'SELECT PostID, Title, Message FROM travelpost where Title LIKE "%' . $filtertext . '%"';
+        $sql = 'SELECT PostID, Title, Message FROM travelpost where Title LIKE "%' . $filtertext . '%" order by Title';
         return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
 
 
     //search images options
     public function get_for_search_imagestitle($filtertext){
-        $sql = 'SELECT * FROM travelimagedetails where Title LIKE "%' . $filtertext . '%"';
+        $sql = 'SELECT * FROM travelimagedetails where Title LIKE "%' . $filtertext . '%" order by Title';
         $images = $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
         if($images == null){
             return null;
@@ -292,7 +292,7 @@ class DB extends PDO{
 
     //city images
     public function get_for_search_imagescity($cityID){
-        $sql = 'SELECT * FROM travelimagedetails where CityCode ="' .$cityID . '"';
+        $sql = 'SELECT * FROM travelimagedetails where CityCode ="' .$cityID . '" order by Title';
         $images = $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
         if($images == null){
             return null;
@@ -312,7 +312,7 @@ class DB extends PDO{
 
     //country images
     public function get_for_search_imagescountry($countryID){
-        $sql = 'SELECT * FROM travelimagedetails where CountryCodeISO ="' .$countryID . '"';
+        $sql = 'SELECT * FROM travelimagedetails where CountryCodeISO ="' .$countryID . '" order by Title';
         $images = $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
         if($images == null){
             return null;
@@ -332,7 +332,7 @@ class DB extends PDO{
 
     //continents images
     public function get_for_search_imagescontinent($continentID){
-        $sql = 'SELECT * FROM ( travelimagedetails inner join geocountries on travelimagedetails.CountryCodeISO = geocountries.ISO)';
+        $sql = 'SELECT * FROM ( travelimagedetails inner join geocountries on travelimagedetails.CountryCodeISO = geocountries.ISO) order by Title';
         $allcountries = $this->query($sql);
         
          foreach($allcountries as $country){

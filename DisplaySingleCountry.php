@@ -29,10 +29,10 @@ if(isset($_GET["ISO"])){
                             //get the images associated with the imageIDs
                             foreach($imagesdetails as $image){  
                                 $imageIDs = $dbhandle->get_for_SingleCountry_image($image["ImageID"]);
-                        ?> 
-                        <!-- image with link -->
-                        <?php echo "<a href='SingleImage.php?id=" .$imageIDs["ImageID"] ."'>"."<img src='images/square-medium/" . $imageIDs['Path'] ."' class='img-thumbnail'></a>"; ?> 
-                        <?php } ?> <!--end foreach loop -->
+                                //image with link
+                                echo "<a href='SingleImage.php?id=" .$imageIDs["ImageID"] ."'>"."<img src='images/square-medium/" . $imageIDs['Path'] ."' class='img-thumbnail'></a>";  
+                            } 
+                        ?> <!--end foreach loop -->
                     </div><!--end card-deck -->
                       
                     <div class="col-md-4" >
@@ -55,21 +55,14 @@ if(isset($_GET["ISO"])){
                                     Currency: <?php echo $countryinfo["CurrencyCode"];?>
                                 </li>
                                 <li class="list-group-item">
-                                    flag: <?php echo "temp";?>
+                                    flag: <?php echo "<img src='images/flags/" . $countryinfo['ISO'] .".jpg' style='width: 140; height: 100;'>";?>
                                 </li>
                             </ul>
                         </div>
  
                     </div>
-                </div>
-
-
-
-                
-            
+                </div> 
         </div>
-        
-
     <?php include 'footer-sidebar.inc.php'; ?>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>

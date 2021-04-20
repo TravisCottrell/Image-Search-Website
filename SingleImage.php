@@ -15,7 +15,6 @@ if(isset($_GET["id"])){
     while($travelimages = $result->fetch()){
         if($travelimages["ImageID"] == $_GET["id"]){
             $imageinfo = $travelimages; 
-            
         }
     }
 
@@ -76,6 +75,7 @@ if(isset($_GET["id"])){
         <div class="col-md-12">
             <h2><?php echo $imageinfo["Title"]; ?></h2>                            
             <p>By: <?php echo  "<a href='DisplaySIngleUser.php?UID=".$userinfo["UID"]."'>" . $userinfo["FirstName"]." ". $userinfo["LastName"]; ?> </p>
+            <?php echo '<a href="favorites.php?id='. $imageinfo["ImageID"] .'"><button type="button" class="btn btn-secondary">Fav</button></a><br>';?>
         </div>           
         <div class="col-md-8">
             <a href="#myModal" role="button" data-toggle="modal">

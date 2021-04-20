@@ -29,10 +29,10 @@ if(isset($_GET["UID"])){
                         <?php
                             //get the images associated with the imageIDs
                             foreach($images as $imageIDs){     
-                        ?> 
-                        <!-- image with link -->
-                        <?php echo "<a href='SingleImage.php?id=" .$imageIDs["ImageID"] ."'>"."<img src='images/square-medium/" . $imageIDs['Path'] ."' class='img-thumbnail'></a>"; ?> 
-                        <?php } ?> <!--end foreach loop -->
+                                //image with link 
+                                echo "<a href='SingleImage.php?id=" .$imageIDs["ImageID"] ."'>"."<img src='images/square-medium/" . $imageIDs['Path'] ."' class='img-thumbnail'></a>"; 
+                            } 
+                         ?> <!--end foreach loop -->
                     </div><!--end card-deck -->
                       
                     <div class="col-md-3" >
