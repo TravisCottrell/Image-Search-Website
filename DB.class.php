@@ -373,5 +373,17 @@ class DB extends PDO{
         }
         return $countrynames;
     } 
+
+        public function get_only_the_best_images() {
+        //query to output all images that have an existing image id and path
+        $sql = "SELECT DISTINCT travelimagerating.Rating, travelimage.ImageID, travelimage.Path FROM travelimagerating, travelimage WHERE travelimagerating.ImageID = travelimage.ImageID AND travelimagerating.Rating = '5'";
+        $result = $this->query($sql);
+        while ($row = $result->fetch()) {
+            echo '<div class="card col-md-2 mb-1">';
+            echo '<center><p><a href="SingleImage.php?id='.$row['ImageID'].'">Rating: '.$row['Rating'].'</a></p></center>';
+            echo '<center><a href="SingleImage.php?id='.$row['ImageID'].'"><img src="images/square-small/'.$row['Path'].'" class="img-thumbnail"></a></center>';
+            echo '</div>';
+        }
+    }
 }
 ?>
