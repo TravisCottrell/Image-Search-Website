@@ -50,7 +50,7 @@ if(isset($_GET["id"])){
                                 <li class="list-group-item">
                                     Posted By: 
                                     <?php 
-                                        $fullName = "<a href='DisplaySIngleUser.php?UID=".$userInfo["UID"]."'>" . $userInfo["FirstName"] . " " . $userInfo["LastName"] . "</a>";
+                                        $fullName = "<a href='DisplaySingleUser.php?UID=".$userInfo["UID"]."'>" . $userInfo["FirstName"] . " " . $userInfo["LastName"] . "</a>";
                                         echo $fullName;
                                     ?>
                                 </li>

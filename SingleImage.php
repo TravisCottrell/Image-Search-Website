@@ -74,7 +74,7 @@ if(isset($_GET["id"])){
     <div class="row">
         <div class="col-md-12">
             <h2><?php echo $imageinfo["Title"]; ?></h2>                            
-            <p>By: <?php echo  "<a href='DisplaySIngleUser.php?UID=".$userinfo["UID"]."'>" . $userinfo["FirstName"]." ". $userinfo["LastName"]; ?> </p>
+            <p>By: <?php echo  "<a href='DisplaySingleUser.php?UID=".$userinfo["UID"]."'>" . $userinfo["FirstName"]." ". $userinfo["LastName"]; ?> </p>
             <?php echo '<a href="favorites.php?id='. $imageinfo["ImageID"] .'"><button type="button" class="btn btn-secondary">Fav</button></a><br>';?>
         </div>           
         <div class="col-md-8">

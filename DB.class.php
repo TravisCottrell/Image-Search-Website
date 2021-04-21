@@ -124,7 +124,7 @@ class DB extends PDO{
         $result = $this->query($sql);
         while ($row = $result->fetch()) {
             $fullname = $row['FirstName'] ." ". $row["LastName"];
-            echo "<li><a href='DisplaySIngleUser.php?UID=".$row["UID"]."'>" . $fullname. "</a></li>"; 
+            echo "<li><a href='DisplaySingleUser.php?UID=".$row["UID"]."'>" . $fullname. "</a></li>"; 
         }
     }
     //////////////////////////////////////////////
@@ -182,7 +182,7 @@ class DB extends PDO{
         $sql = 'SELECT * FROM geocontinents';
         $continents = $this->query($sql);
         while($continent = $continents->fetch()){
-            echo "<option value=". $continent_code ." ". $continent["ContinentCode"] ."> ". $continent["ContinentName"] ." </option>";
+            echo "<option value='". $continent["ContinentCode"]."'>". $continent["ContinentName"] ." </option>";
         }
     }
 
@@ -201,7 +201,7 @@ class DB extends PDO{
             $sql = "select * from geocountries where ISO ='" . $country["CountryCodeISO"]. "'";
             $result = $this->query($sql);
             $countrynames = $result->fetch();
-            echo "<option value=". $country_name ." ". $countrynames["ISO"] ."> ". $countrynames["CountryName"] ." </option>";
+            echo "<option value='". $countrynames["ISO"] ."'> ". $countrynames["CountryName"] ." </option>";
         } 
     }
 

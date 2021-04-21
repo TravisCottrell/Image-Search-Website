@@ -29,7 +29,7 @@ $dbhandle = new DB();
           <form class="form-inline" action="browse-images.php" method="get">
             <div class="form-group">
                 <select class="form-control" name="continent_code">
-                    <option value="<?php $dbhandle->get_for_browse_continents(); ?>">Filter by Continent</option>
+                    <option value="" selected>Filter by Continent</option>
                     <?php $dbhandle->get_for_browse_continents(); ?>                  
                 </select>
               </div>   
@@ -37,7 +37,7 @@ $dbhandle = new DB();
              
     		  <div class="form-group">
     		    <select class="form-control" name="country_code">
-    		    	<option value="<?php $dbhandle->get_for_browse_countries(); ?>">Filter by Country</option>
+    		    	<option value="" selected>Filter by Country</option>
                     <?php $dbhandle->get_for_browse_countries(); ?>
     		    </select>
     		  </div>
