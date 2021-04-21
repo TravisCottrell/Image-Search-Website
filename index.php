@@ -73,12 +73,17 @@ require_once("DB.class.php");
     </a>
   </div>
 </div>
-
-
+<br>
+  <center><h2>Check Out The highest Rated images by our World Travelers</h2></center>
+  <br>
+<div class="row">
+  <?php $dbhandle->get_only_the_best_images(); ?>
+</div>
   <?php include 'footer.inc.php'; ?>
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+
 </body>
 
 </html>
