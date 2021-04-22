@@ -11,7 +11,7 @@
                 <li class='nav-item'><a  href='favorites.php' role='button'><span class="bi bi-heart-fill nav-link"> favorites</span></a></li>
                 <li class="nav-item"><a  href="#" class="nav-link">My Account</a></li>
                 <li class="nav-item"><a  href="login.php" class="nav-link">Login</a></li>
-                <li class="nav-item"><a  href="#" class="nav-link">Register</a></li>
+                <li class="nav-item"><a  href="register.php" class="nav-link">Register</a></li>
             </ul>
         </div>
     </nav>

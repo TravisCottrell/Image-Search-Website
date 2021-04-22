@@ -385,5 +385,23 @@ class DB extends PDO{
             echo '</div>';
         }
     }
+
+    //////////////////////////////////////////////
+    //register.php functions
+    //////////////////////////////////////////////
+    public function create_new_user($email,$pass){
+        date_default_timezone_set("America/New_York");
+        $state = 1;
+        $date = date("Y-m-d H:i:s");
+        $sql = "INSERT INTO traveluser(Username, Pass, State, DateJoined, DateLastModified) VALUES(?,?,?,?,?)";
+        $insert = $this->prepare($sql);
+        $result = $insert->execute([$email,$pass, $state, $date, $date]);
+        if($result){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
 ?>
