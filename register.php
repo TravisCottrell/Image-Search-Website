@@ -7,7 +7,7 @@ $dbhandle = new DB();
 $newaccount = false;
 if(isset($_POST['create'])){
     $newaccount = $dbhandle->create_new_user($_POST['name'],$_POST['password']);
- 
+	if(!$newaccount) echo '<script>alert("sorry, there was a problem creating your account.")</script>';
 }
 
 ?>
@@ -34,7 +34,7 @@ if(isset($_POST['create'])){
 						<div class="col-md-6">
 							<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 								<div class="form-group">
-									<input type="text" class="form-control" name="name" placeholder="Enter email" required>
+									<input type="email" class="form-control" name="name" placeholder="Enter email" required>
 								</div>
 								<div class="form-group">
 									<input type="text" class="form-control" name="password" placeholder="Enter Password" required>
@@ -52,8 +52,6 @@ if(isset($_POST['create'])){
 				<?php
 					if($newaccount){
 						Echo "<center>Account Created!</center>";
-					}else{
-						Echo "<center>Sorry, there was an issue</center>";
 					}
 				?>
 			</div>

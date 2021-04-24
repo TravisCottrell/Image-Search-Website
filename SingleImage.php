@@ -1,51 +1,59 @@
 <?php 
-require_once('config.php'); 
-try {
-   $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
-   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $e) {
-   die( $e->getMessage() );
-}
+require_once("DB.class.php");
+$dbhandle = new DB();
 
 if(isset($_GET["id"])){
     //inner joins of info related to imageId
-    $sql = 'SELECT * FROM (travelimage inner join travelimagedetails on travelimage.ImageID = travelimagedetails.ImageID)';
-    $result = $pdo->query($sql);
-    while($travelimages = $result->fetch()){
-        if($travelimages["ImageID"] == $_GET["id"]){
-            $imageinfo = $travelimages; 
-        }
-    }
+    $imageinfo = $dbhandle->get_imageinfo($_GET['id']);
 
     //get rating info
-    $sql = "SELECT avg(Rating), count(ImageID) FROM `travelimagerating` WHERE ImageID =" . $imageinfo["ImageID"];
-    $result = $pdo->query($sql);
-    $ratinginfo = $result->fetch();
+    $ratinginfo = $dbhandle->get_imagerating($imageinfo["ImageID"]);
     
     if(isset($imageinfo["CityCode"])){
         //get city info
-        $sql = "SELECT * FROM geocities WHERE GeoNameID =" . $imageinfo["CityCode"];
-        $result = $pdo->query($sql);
-        $cityinfo = $result->fetch();
+        $cityinfo = $dbhandle->get_imagecity($imageinfo["CityCode"]);
     }else{
         $cityinfo['AsciiName'] = "not available";
         $cityinfo['Latitude']= "not available";
         $cityinfo['Longitude']= "not available";
     }
         //get country info
-        $sql = "SELECT * FROM geocountries WHERE ISO ="."'" . $imageinfo["CountryCodeISO"]."'";
-        $result = $pdo->query($sql);
-        $countryinfo = $result->fetch();
-
+        $countryinfo = $dbhandle->get_imagecountry($imageinfo["CountryCodeISO"]);
         //get poster info
-        $sql = "SELECT * FROM traveluserdetails WHERE UID ="."'" . $imageinfo["UID"]."'";
-        $result = $pdo->query($sql);
-        $userinfo = $result->fetch();   
+        $userinfo = $dbhandle->get_imageposter($imageinfo["UID"]);
 }
 
-?>
+if(isset($_POST['submit'])){
 
+}
+
+function writereview(){
+    //rating stars: used the code from: https://codepen.io/hesguru/pen/BaybqXv
+    echo '<div class="row" id="searchform">
+            <div class="col-md-10">
+                <h5>Leave a Review</h5>
+                <form method="post">
+                    <div class="rate">
+                        <input type="radio" id="star5" name="rate" value="5" required/>
+                        <label for="star5" title="text">5 stars</label>
+                        <input type="radio" id="star4" name="rate" value="4" />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star3" name="rate" value="3" />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star2" name="rate" value="2" />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star1" name="rate" value="1" />
+                        <label for="star1" title="text">1 star</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="reviewtext" rows="3"></textarea>
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-info">Submit</button>
+                </form>
+            </div>
+        </div>';
+}
+?>
 
 <title>Single Image</title>
 <head>  
@@ -73,12 +81,14 @@ if(isset($_GET["id"])){
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <!-- title, name, fav button -->
             <h2><?php echo $imageinfo["Title"]; ?></h2>                            
             <p>By: <?php echo  "<a href='DisplaySingleUser.php?UID=".$userinfo["UID"]."'>" . $userinfo["FirstName"]." ". $userinfo["LastName"]; ?> </p>
-            <?php echo '<a href="favorites.php?id='. $imageinfo["ImageID"] .'"><button type="button" class="btn btn-secondary">Fav</button></a><br>';?>
+            <?php echo '<a href="favorites.php?id='. $imageinfo["ImageID"] .'"><button type="button" class="btn btn-secondary">Fav</button></a><br>';?><br>
         </div>           
         <div class="col-md-8">
             <a href="#myModal" role="button" data-toggle="modal">
+                <!-- image -->
                 <img src="images/medium/<?php echo $imageinfo['Path']?>" class="rounded" >
             </a>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-hidden="true">
@@ -101,6 +111,10 @@ if(isset($_GET["id"])){
                     </div>
                 </div>
             </div>
+
+            <!-- review box and stars if logged in-->
+            <?php if(isset($_SESSION['name'])){writereview();}?>
+            
         </div>
 
         <div class="col-md-4">    
@@ -147,6 +161,9 @@ if(isset($_GET["id"])){
         </div>
         
     </div>
+   
+
+  </div>
 </div>
 
  <?php include 'footer.inc.php'; ?> 

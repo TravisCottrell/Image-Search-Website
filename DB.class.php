@@ -378,7 +378,7 @@ class DB extends PDO{
         //query to output all images that have an existing image id and path
         $sql = "SELECT DISTINCT travelimagerating.Rating, travelimage.ImageID, travelimage.Path FROM travelimagerating, travelimage WHERE travelimagerating.ImageID = travelimage.ImageID AND travelimagerating.Rating = '5'";
         $result = $this->query($sql);
-        while ($row = $result->fetch()) {
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             echo '<div class="card col-md-2 mb-1">';
             echo '<center><p><a href="SingleImage.php?id='.$row['ImageID'].'">Rating: '.$row['Rating'].'</a></p></center>';
             echo '<center><a href="SingleImage.php?id='.$row['ImageID'].'"><img src="images/square-small/'.$row['Path'].'" class="img-thumbnail"></a></center>';
@@ -390,18 +390,76 @@ class DB extends PDO{
     //register.php functions
     //////////////////////////////////////////////
     public function create_new_user($email,$pass){
+        //check to see if username already exists
+        $sql = "SELECT UserName FROM traveluser WHERE UserName ='" . $email . "'";
+        $result = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+        if($result) return false; 
+
         date_default_timezone_set("America/New_York");
         $state = 1;
         $date = date("Y-m-d H:i:s");
         $sql = "INSERT INTO traveluser(Username, Pass, State, DateJoined, DateLastModified) VALUES(?,?,?,?,?)";
         $insert = $this->prepare($sql);
         $result = $insert->execute([$email,$pass, $state, $date, $date]);
+        
         if($result){
+        //get the new users UID
+        $sql = "SELECT UID, UserName FROM traveluser WHERE UserName ='" . $email . "'";
+        $getUID = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+        //create traveluserdetails for new user
+        $sql = "INSERT INTO traveluserdetails(UID, Email, Privacy) VALUES(?,?,?)";
+        $insert = $this->prepare($sql);
+        $insert->execute([$getUID['UID'], $email, $state]);
             return true;
         }else{
             return false;
         }
     }
 
+    //////////////////////////////////////////////
+    //MyAccount.php functions
+    //////////////////////////////////////////////
+    public function insert_userinfo(){
+        $sql = "INSERT INTO traveluserdetails(UID, Email, Privacy) VALUES(?,?,?)
+                SELECT * FROM traveluserdetails WHERE UID = TEMP";//fill out temp
+    }
+
+    
+    //////////////////////////////////////////////
+    //SingleImage.php functions
+    //////////////////////////////////////////////
+    public function get_imageinfo($imageID){
+        //inner joins of info related to imageId
+        $sql = 'SELECT * FROM (travelimage inner join travelimagedetails on travelimage.ImageID = travelimagedetails.ImageID)';
+        $result = $this->query($sql);
+        while($travelimages = $result->fetch()){
+            if($travelimages["ImageID"] == $imageID){
+                return $travelimages; 
+            }
+        }
+    }
+
+    public function get_imagerating($imageID){
+        $sql = "SELECT avg(Rating), count(ImageID) FROM `travelimagerating` WHERE ImageID =" . $imageID;
+        return $this->query($sql)->fetch();
+    }
+
+    public function get_imagecity($citycode){
+        //get city info
+        $sql = "SELECT * FROM geocities WHERE GeoNameID =" . $citycode;
+        return $this->query($sql)->fetch();
+    }
+
+    public function get_imagecountry($countrycode){
+        //get country info
+        $sql = "SELECT * FROM geocountries WHERE ISO ="."'" . $countrycode ."'";
+        return $this->query($sql)->fetch();
+    }
+
+    public function get_imageposter($UID){
+        //get poster info
+        $sql = "SELECT * FROM traveluserdetails WHERE UID ="."'" . $UID ."'";
+        return $this->query($sql)->fetch(); 
+    }
 }
 ?>
