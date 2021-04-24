@@ -432,7 +432,7 @@ class DB extends PDO{
         //inner joins of info related to imageId
         $sql = 'SELECT * FROM (travelimage inner join travelimagedetails on travelimage.ImageID = travelimagedetails.ImageID)';
         $result = $this->query($sql);
-        while($travelimages = $result->fetch()){
+        while($travelimages = $result->fetch(PDO::FETCH_ASSOC)){
             if($travelimages["ImageID"] == $imageID){
                 return $travelimages; 
             }
@@ -440,26 +440,52 @@ class DB extends PDO{
     }
 
     public function get_imagerating($imageID){
-        $sql = "SELECT avg(Rating), count(ImageID) FROM `travelimagerating` WHERE ImageID =" . $imageID;
-        return $this->query($sql)->fetch();
+        $sql = "SELECT avg(Rating), count(ImageID) FROM `travelimagerating` WHERE ImageID = $imageID";
+        return $this->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
     public function get_imagecity($citycode){
         //get city info
-        $sql = "SELECT * FROM geocities WHERE GeoNameID =" . $citycode;
-        return $this->query($sql)->fetch();
+        $sql = "SELECT * FROM geocities WHERE GeoNameID = $citycode";
+        return $this->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
     public function get_imagecountry($countrycode){
         //get country info
-        $sql = "SELECT * FROM geocountries WHERE ISO ="."'" . $countrycode ."'";
-        return $this->query($sql)->fetch();
+        $sql = "SELECT * FROM geocountries WHERE ISO = '$countrycode'";
+        return $this->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
     public function get_imageposter($UID){
         //get poster info
-        $sql = "SELECT * FROM traveluserdetails WHERE UID ="."'" . $UID ."'";
-        return $this->query($sql)->fetch(); 
+        $sql = "SELECT * FROM traveluserdetails WHERE UID = '$UID'";
+        return $this->query($sql)->fetch(PDO::FETCH_ASSOC); 
+    }
+
+    public function insert_new_review($imageID, $rating, $reviewtext, $username){
+        //check if the user has already left a review for this image
+        $sql = "SELECT * FROM traveluser WHERE UserName ='$username'";
+        $user = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+        
+        $sql = 'SELECT * FROM travelimagerating WHERE ImageID ='.$imageID.' AND UID ='.$user['UID'];
+        $result = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+        if($result){
+            echo '<script>alert("sorry, You have already left a review for this image.")</script>';
+            return false;
+        } 
+
+        date_default_timezone_set("America/New_York");
+        $date = date("Y-m-d H:i:s");
+       
+        $sql = "INSERT INTO travelimagerating(ImageID, Rating, UID, Review, ReviewTime) Values(?,?,?,?,?)";
+        $insert = $this->prepare($sql);
+        $insert->execute([$imageID, $rating, $user['UID'], $reviewtext, $date]);
+        return true; 
+    }
+
+    public function get_image_reviews($imageID){
+        $sql = "SELECT * FROM `travelimagerating` where ImageID = $imageID ORDER BY travelimagerating.ReviewTime DESC";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
 }
 ?>

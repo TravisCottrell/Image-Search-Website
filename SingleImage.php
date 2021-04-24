@@ -1,6 +1,7 @@
 <?php 
 require_once("DB.class.php");
 $dbhandle = new DB();
+session_start();
 
 if(isset($_GET["id"])){
     //inner joins of info related to imageId
@@ -17,17 +18,25 @@ if(isset($_GET["id"])){
         $cityinfo['Latitude']= "not available";
         $cityinfo['Longitude']= "not available";
     }
-        //get country info
-        $countryinfo = $dbhandle->get_imagecountry($imageinfo["CountryCodeISO"]);
-        //get poster info
-        $userinfo = $dbhandle->get_imageposter($imageinfo["UID"]);
+
+    //get country info
+    $countryinfo = $dbhandle->get_imagecountry($imageinfo["CountryCodeISO"]);
+    
+    //get poster info
+    $userinfo = $dbhandle->get_imageposter($imageinfo["UID"]);
+
+    //get reviews
+    $reviews = $dbhandle->get_image_reviews($_GET['id']);
 }
 
 if(isset($_POST['submit'])){
+    $temp = $dbhandle->insert_new_review($imageinfo["ImageID"], $_POST['rate'], $_POST['reviewtext'], $_SESSION['name']);
 
+    //re get reviews
+    $reviews = $dbhandle->get_image_reviews($_GET['id']);
 }
 
-function writereview(){
+function writeReview(){
     //rating stars: used the code from: https://codepen.io/hesguru/pen/BaybqXv
     echo '<div class="row" id="searchform">
             <div class="col-md-10">
@@ -46,7 +55,7 @@ function writereview(){
                         <label for="star1" title="text">1 star</label>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" id="reviewtext" rows="3"></textarea>
+                        <textarea class="form-control" name="reviewtext" rows="3"></textarea>
                     </div>
                     <button type="submit" name="submit" class="btn btn-info">Submit</button>
                 </form>
@@ -113,8 +122,22 @@ function writereview(){
             </div>
 
             <!-- review box and stars if logged in-->
-            <?php if(isset($_SESSION['name'])){writereview();}?>
+            <?php if(isset($_SESSION['name'])){writeReview();}?>
             
+            <!-- print reviews -->
+            <div class="row" id="searchform">
+                <div class="col-md-10">
+                <h5>Reviews</h5>
+                    <?php
+                        foreach($reviews as $review){
+                            echo "Rating: " . $review['Rating'] . "<br>";
+                            echo $review['Review'];
+                            echo '<br><br>';
+                        }
+                    ?>
+                </div>
+            </div><!-- end print reviews -->
+
         </div>
 
         <div class="col-md-4">    
