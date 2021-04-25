@@ -1,3 +1,4 @@
+<?php require_once("DB.class.php"); ?>
 <html>
 <title>About Us</title>
 <style type="text/css">

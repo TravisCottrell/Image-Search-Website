@@ -3,7 +3,6 @@ require_once("DB.class.php");
 $dbhandle = new DB();
 
 if(isset($_POST['submit'])) {
-	session_start();
 
 	$_SESSION['name'] = htmlentities($_POST['name']);
 	$_SESSION['password'] = htmlentities($_POST['password']);
@@ -14,22 +13,23 @@ if(isset($_POST['submit'])) {
 	$username = stripcslashes($username);
 	$userpass = stripcslashes($userpass);
 
-	// $userlogin = $dbhandle->get_for_user_name($username);
+	$userlogin = $dbhandle->get_for_user_name($username, $userpass);
+	$_SESSION['UID'] = $userlogin['UID'];
+	$_SESSION['State'] = $userlogin['State'];
+	
 
-	$mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
-	$result = $mysqli->query("SELECT * FROM `traveluser` WHERE UserName = '$username' AND Pass = '$userpass'");
-		if($result->num_rows == 0) {
-		    echo '<script>alert("These credentials are invalid")</script>';
-		    session_destroy();
-		} else {
-		    header('Location: index.php');
-		}
-	$mysqli->close();
+	// $mysqli = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
+	// $result = $mysqli->query("SELECT * FROM `traveluser` WHERE UserName = '$username' AND Pass = '$userpass'");	
+	// 	if($result->num_rows == 0) {
+	// 	    echo '<script>alert("These credentials are invalid")</script>';
+	// 	    session_destroy();
+	// 	} else {
+	// 	    header('Location: index.php');
+	// 	}
+	// $mysqli->close();
 }
 
 if(isset($_POST['submit_2'])) {
-	session_start();
-
 	session_destroy();
 }
 

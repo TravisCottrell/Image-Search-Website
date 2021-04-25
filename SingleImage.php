@@ -1,7 +1,7 @@
 <?php 
 require_once("DB.class.php");
 $dbhandle = new DB();
-session_start();
+
 
 if(isset($_GET["id"])){
     //inner joins of info related to imageId
@@ -31,15 +31,18 @@ if(isset($_GET["id"])){
 
 if(isset($_POST['submit'])){
     $temp = $dbhandle->insert_new_review($imageinfo["ImageID"], $_POST['rate'], $_POST['reviewtext'], $_SESSION['name']);
+    header("Refresh:0");
+}
 
-    //re get reviews
-    $reviews = $dbhandle->get_image_reviews($_GET['id']);
+if(isset($_POST["delete"])){
+    $dbhandle->delete_review($_POST["delete"]);
+    header("Refresh:0");
 }
 
 function writeReview(){
     //rating stars: used the code from: https://codepen.io/hesguru/pen/BaybqXv
-    echo '<div class="row" id="searchform">
-            <div class="col-md-10">
+    echo '<div class="row form-group" id="searchform">
+            <div class="col-md-10 form-group">
                 <h5>Leave a Review</h5>
                 <form method="post">
                     <div class="rate">
@@ -125,13 +128,21 @@ function writeReview(){
             <?php if(isset($_SESSION['name'])){writeReview();}?>
             
             <!-- print reviews -->
-            <div class="row" id="searchform">
+            <div class="row form-group" id="searchform">
                 <div class="col-md-10">
                 <h5>Reviews</h5>
                     <?php
                         foreach($reviews as $review){
                             echo "Rating: " . $review['Rating'] . "<br>";
-                            echo $review['Review'];
+                            echo $review['Review']. "<br>";
+                            //admin review delete button
+                            if(isset($_SESSION["State"])){
+                                if($_SESSION["State"] == 2){
+                                    echo "<form method='post'>";
+                                    echo '<button type="submit" name="delete" value="' . $review['ImageRatingID'] .'" class=" btn btn-danger">Delete</button>';
+                                    echo "</form>"; 
+                                }
+                            }
                             echo '<br><br>';
                         }
                     ?>

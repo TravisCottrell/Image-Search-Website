@@ -1,6 +1,6 @@
 <?php
 require_once('config.php'); 
-
+session_start();
 
 class DB extends PDO{
  
@@ -238,14 +238,15 @@ class DB extends PDO{
     //////////////////////////////////////////////
     //login.php functions
     //////////////////////////////////////////////
-    public function get_for_user_name($UserName) {
-        $sql = "SELECT * FROM `traveluser` WHERE UserName = '$UserName' AND Pass = 'abcd1234'";
-        $result = $this->query($sql);
-        if($result == 0) {
-            echo "this user does not exist";
-        } else {
-        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
-          }
+    public function get_for_user_name($UserName, $pass) {
+        $sql = "SELECT * FROM `traveluser` WHERE UserName = '$UserName' AND Pass = '$pass'";
+        $result = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+        if(!$result) {
+            echo '<script>alert("These credentials are invalid")</script>';
+        }else{
+            header('Location: index.php');
+            return $result;
+        }
     }
     //////////////////////////////////////////////
     //favorites.php functions
@@ -486,6 +487,11 @@ class DB extends PDO{
     public function get_image_reviews($imageID){
         $sql = "SELECT * FROM `travelimagerating` where ImageID = $imageID ORDER BY travelimagerating.ReviewTime DESC";
         return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+    }
+
+    public function delete_review($imageRatingID){
+        $sql = "DELETE FROM travelimagerating WHERE travelimagerating.ImageRatingID = $imageRatingID";
+        $this->query($sql);
     }
 }
 ?>

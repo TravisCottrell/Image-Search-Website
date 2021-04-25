@@ -1,7 +1,9 @@
 <?php 
 require_once("DB.class.php");
   $dbhandle = new DB();
+  
   $name = isset($_SESSION['name']) ? $_SESSION['name'] : '';
+ 
 ?>
 <html>
 <title>Home</title>
