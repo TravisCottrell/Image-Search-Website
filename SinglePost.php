@@ -38,6 +38,8 @@ if(isset($_GET["id"])){
                     </div>
                       
                     <div class="col-md-3" >
+                        <!-- Add post to favorites -->
+                        <?php echo '<a href="favorites.php?postid='. $travelPost["PostID"] .'"><button type="button" class="btn btn-outline-secondary btn-sm"><span class="bi bi-heart-fill nav-link"> Add to Favorites</button></a><br>';?> <br>
                         <!-- Post details card -->
                         <div class="card">
                             <div class="card-header" >

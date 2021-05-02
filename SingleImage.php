@@ -93,10 +93,9 @@ function writeReview(){
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <!-- title, name, fav button -->
+            <!-- title, name -->
             <h2><?php echo $imageinfo["Title"]; ?></h2>                            
             <p>By: <?php echo  "<a href='DisplaySingleUser.php?UID=".$userinfo["UID"]."'>" . $userinfo["FirstName"]." ". $userinfo["LastName"]; ?> </p>
-            <?php echo '<a href="favorites.php?id='. $imageinfo["ImageID"] .'"><button type="button" class="btn btn-secondary">Fav</button></a><br>';?><br>
         </div>           
         <div class="col-md-8">
             <a href="#myModal" role="button" data-toggle="modal">
@@ -151,7 +150,9 @@ function writeReview(){
 
         </div>
 
-        <div class="col-md-4">    
+        <div class="col-md-4">   
+            <!-- Fav button -->
+        <?php echo '<a href="favorites.php?id='. $imageinfo["ImageID"] .'"><button type="button" class="btn btn-outline-secondary btn-sm"><span class="bi bi-heart-fill nav-link"> Add to Favorites</button></a><br>';?> <br>
             <div class="card"> <!-- START Rating Card -->
                 <div class="card-header" > 
                     Rating

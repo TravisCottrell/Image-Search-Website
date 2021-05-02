@@ -139,7 +139,7 @@ class DB extends PDO{
         $sql = "SELECT * FROM travelimage WHERE UID = $UID";
         return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
-        //////////////////////////////////////////////
+    //////////////////////////////////////////////
     //displaySingleCity.php functions
     //////////////////////////////////////////////
     public function get_for_SingleCity_cityinfo($cityID){
@@ -258,6 +258,16 @@ class DB extends PDO{
 
     public function get_img_title_for_fav($ImgID) {
         $sql = "SELECT * FROM `travelimagedetails` WHERE ImageID = '$ImgID'";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+    }
+
+    public function get_post_info_for_fav($PostID) {
+        $sql = "SELECT * FROM `travelpost` WHERE PostID = '$PostID'";
+        return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
+    }
+
+    public function get_sorted_asc_img_fav($ImgID) {
+        $sql = "SELECT * FROM `travelimagedetails` WHERE ImageID = '$ImgID' ORDER by Title asc";
         return $this->query($sql)->fetchall(PDO::FETCH_ASSOC);
     }
 
@@ -380,9 +390,11 @@ class DB extends PDO{
         $sql = "SELECT DISTINCT travelimagerating.Rating, travelimage.ImageID, travelimage.Path FROM travelimagerating, travelimage WHERE travelimagerating.ImageID = travelimage.ImageID AND travelimagerating.Rating = '5'";
         $result = $this->query($sql);
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            echo '<div class="card col-md-2 mb-1">';
-            echo '<center><p><a href="SingleImage.php?id='.$row['ImageID'].'">Rating: '.$row['Rating'].'</a></p></center>';
+            echo '<div class="card">';
             echo '<center><a href="SingleImage.php?id='.$row['ImageID'].'"><img src="images/square-small/'.$row['Path'].'" class="img-thumbnail"></a></center>';
+            
+            echo '<center><p><a href="SingleImage.php?id='.$row['ImageID'].'">Rating: '.$row['Rating'].'</a></p></center>';
+           
             echo '</div>';
         }
     }
@@ -493,5 +505,39 @@ class DB extends PDO{
         $sql = "DELETE FROM travelimagerating WHERE travelimagerating.ImageRatingID = $imageRatingID";
         $this->query($sql);
     }
+    //function to display two of the most recent reviews left by users
+    public function latest_user_review() {
+        function custom_echo($x, $length)
+            {
+              if(strlen($x)<=$length)
+              {
+                echo $x;
+              }
+              else
+              {
+                $y=substr($x,0,$length) . '...';
+                echo $y;
+              }
+            }
+        $sql ="SELECT travelimagerating.Rating, travelimagerating.Review, travelimagerating.ReviewTime, travelimage.Path, travelimage.ImageID FROM travelimagerating JOIN travelimage ON travelimagerating.ImageID = travelimage.ImageID ORDER by ReviewTime DESC LIMIT 2";
+        $result = $this->query($sql);
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) { ?>
+            <a href="SingleImage.php?id=<?php echo $row['ImageID']; ?>"><h2><button class="button btn-outline-info btn-sm">User Rating: <span class="badge badge-light"><?php echo $row['Rating']; ?></span></button></h2></a>
+            <ul class="list-unstyled">
+              <li class="media">
+                <a href="SingleImage.php?id=<?php echo $row['ImageID']; ?>"><img class="mr-3" src="images/thumb/<?php echo $row['Path']; ?>" alt="Generic placeholder image"></a>
+                <div class="media-body">
+                  <h3 class="mt-0 mb-1">Date Posted: <?php echo strstr($row['ReviewTime'],' ',true); ?></h3>
+                  <?php custom_echo($row['Review'],100); ?>
+                </div>
+              </li>
+            </ul>
+            <?php
+        }
+    }
+
+
+
+
 }
 ?>
