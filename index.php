@@ -167,7 +167,7 @@ body {
 
 <div class="centered">
   <a href="http://www.priceline.com/?vrid=2406db20bf6d2767d32ad1a14f909e82" target="_blank">
-   <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad1.png" id="adBanner" alt="Ad Banner" /> </center>
+   <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad7.png" id="adBanner" alt="Ad Banner" /> </center>
   </a>
 </div>
 
@@ -195,7 +195,7 @@ function newLocation() {
 }
 
 function rotate() {
-  var adImages = new Array("https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad1.png","https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad6.png","https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad5.png");
+  var adImages = new Array("https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad7.png","https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad6.png","https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad5.png");
 
   thisAd++;
   if (thisAd == adImages.length) {

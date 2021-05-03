@@ -6,6 +6,7 @@
 <header>
     <!-- top part of the header -->
     <nav class="navbar  navbar-expand-md" id="topheader">
+        <li class="navbar-brand" id="nav-bar-logo" ><img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/logo.png"></li>
         <div class="collapse navbar-collapse">
             <ul class="nav nav-tabs ml-auto"> 
                 <li class='nav-item'><a  href='favorites.php' role='button'><span class="bi bi-heart-fill nav-link"> favorites</span></a></li>
