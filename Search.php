@@ -74,6 +74,9 @@ function printsearch(){
 <title>Search</title>
 <body>
     <?php include 'header.inc.php'; ?>
+   <div class="fixright">
+        <a href="https://www.expedia.com/"><img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad4.png"></a>
+      </div>
     <div class="container"> <br>
         <div class="row">
             <h3> Search Results </h3>

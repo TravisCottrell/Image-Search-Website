@@ -58,11 +58,17 @@ if(isset($_POST['create'])){
 		</div>
 
 	</div>
+		<div class="centered">
+  <a href="https://www.opentable.com/" target="_blank">
+   <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad5.png" id="adBanner" alt="Ad Banner" /> </center>
+  </a>
+</div>
 </body>
 <?php include 'footer.inc.php'; ?>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+
 
 
 </html>

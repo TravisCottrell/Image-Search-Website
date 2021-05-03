@@ -22,6 +22,7 @@ if(isset($_GET["id"])){
 <title>Single Post</title>
 
 <body>
+
 <?php include 'header-sidebar.inc.php'; ?>
 
 
@@ -112,7 +113,11 @@ if(isset($_GET["id"])){
                 
             </div>
         </div>
+         
 </div>
+   <div>
+        <center><a href="https://www.southwesternrailway.com/"><img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad33.png"></a></center>
+      </div>
 
 <?php include 'footer-sidebar.inc.php'; ?>
 

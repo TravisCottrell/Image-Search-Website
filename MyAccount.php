@@ -11,11 +11,19 @@ if(isset($_POST['create'])){
 }
 
 ?>
+
 <body>
+<div class="centered">
+  <a href="https://www.agoda.com/?cid=1735414&tag=40510_102bc8d10a8f10a072d1cfaa433781" target="_blank">
+   <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad5.png" id="adBanner" alt="Ad Banner" /> </center>
+  </a>
+</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12"><br></div>
 		</div>
+
+
 
 		<div class="card border-secondary">
 			<div class="card-header">
@@ -75,11 +83,50 @@ if(isset($_POST['create'])){
 		</div>
 
 	</div>
+
+
+
+ 
+
+
+     
+
 </body>
 <?php include 'footer.inc.php'; ?>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+ <script type="text/javascript">
+    window.onload = initBannerLink;
+
+var thisAd = 0;
+
+function initBannerLink() {
+  if (document.getElementById("adBanner").parentNode.tagName == "A") {
+    document.getElementById("adBanner").parentNode.onclick = newLocation;
+  }
+  
+  rotate();
+}
+
+function newLocation() {
+  var adURL = new Array("priceline.com/?vrid=2406db20bf6d2767d32ad1a14f909e82","baidu.com","so.com");
+  document.location.href = "http://www." + adURL[thisAd];
+  return false;
+}
+
+function rotate() {
+  var adImages = new Array("https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad5.png","https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad5.png","https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad5.png");
+
+  thisAd++;
+  if (thisAd == adImages.length) {
+    thisAd = 0;
+  }
+  document.getElementById("adBanner").src = adImages[thisAd];
+
+  setTimeout(rotate, 3 * 1000);
+}
+  </script>
 
 
 </html>

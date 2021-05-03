@@ -102,6 +102,42 @@ $dbhandle = new DB();
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+  <script type="text/javascript">
+    window.onload = initBannerLink;
+
+var thisAd = 0;
+
+function initBannerLink() {
+  if (document.getElementById("adBanner").parentNode.tagName == "A") {
+    document.getElementById("adBanner").parentNode.onclick = newLocation;
+  }
+  
+  rotate();
+}
+
+function newLocation() {
+  var adURL = new Array("priceline.com/?vrid=2406db20bf6d2767d32ad1a14f909e82","baidu.com","so.com");
+  document.location.href = "http://www." + adURL[thisAd];
+  return false;
+}
+
+function rotate() {
+  var adImages = new Array("https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad3.png","https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad4.png","https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad11.png");
+
+  thisAd++;
+  if (thisAd == adImages.length) {
+    thisAd = 0;
+  }
+  document.getElementById("adBanner").src = adImages[thisAd];
+
+  setTimeout(rotate, 3 * 1000);
+}
+  </script>
 </body>
+<div class="fixright">
+  <a href="http://www.priceline.com/?vrid=2406db20bf6d2767d32ad1a14f909e82" target="_blank">
+   <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad3.png" id="adBanner" alt="Ad Banner" /> </center>
+  </a>
+</div>
 
 </html>

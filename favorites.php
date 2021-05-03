@@ -6,6 +6,7 @@ $dbhandle = new DB();
 <title>Favorites</title>
 <body>
 <?php include'header.inc.php'; ?>
+
 <div class="container">
     <div class="row">
         <div class="co-md-12" >
@@ -62,8 +63,10 @@ $user_id = $_GET['id'] ?? null;
         foreach($clean_array_img as $prep_array) {
           $prep_fav_img = $dbhandle->get_img_info_for_fav($prep_array);
           $prep_fav_img_info = $dbhandle->get_img_title_for_fav($prep_array);
+          
             foreach($prep_fav_img_info as $fav_title_out){
               $fav_img_title = $fav_title_out['Title'];
+
               echo '<br>';
               echo '<div class="col-md-3">';
               echo '<div class="card mb-1">';
@@ -101,7 +104,7 @@ $user_id = $_GET['id'] ?? null;
         foreach($clean_array_img as $prep_array) {
           $prep_fav_img = $dbhandle->get_img_info_for_fav($prep_array);
           $prep_fav_img_info = $dbhandle->get_img_title_for_fav($prep_array);
-            
+            asort($prep_fav_img);
             foreach($prep_fav_img_info as $fav_title_out){
               $fav_img_title = $fav_title_out['Title'];
               
@@ -251,11 +254,46 @@ if(!isset($_GET["filteroption"])) {
     </div>
         
 </div>
-
+<div class="fixright">
+  <a href="http://www.priceline.com/?vrid=2406db20bf6d2767d32ad1a14f909e82" target="_blank">
+   <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad4.png" id="adBanner" alt="Ad Banner" /> </center>
+  </a>
+</div>
   <?php include 'footer.inc.php'; ?>
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
   <script src="bootstrap/js/bootstrap.bundle.min.js" ></script>
+    <script type="text/javascript">
+    window.onload = initBannerLink;
+
+var thisAd = 0;
+
+function initBannerLink() {
+  if (document.getElementById("adBanner").parentNode.tagName == "A") {
+    document.getElementById("adBanner").parentNode.onclick = newLocation;
+  }
+  
+  rotate();
+}
+
+function newLocation() {
+  var adURL = new Array("priceline.com/?vrid=2406db20bf6d2767d32ad1a14f909e82","baidu.com","so.com");
+  document.location.href = "http://www." + adURL[thisAd];
+  return false;
+}
+
+function rotate() {
+  var adImages = new Array("https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad4.png","https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad3.png","https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad4.png");
+
+  thisAd++;
+  if (thisAd == adImages.length) {
+    thisAd = 0;
+  }
+  document.getElementById("adBanner").src = adImages[thisAd];
+
+  setTimeout(rotate, 3 * 1000);
+}
+  </script>
 
 
 </html>

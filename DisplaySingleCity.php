@@ -93,6 +93,12 @@ $imagesdetails = $dbhandle->get_for_SingleCity_imagedetails($_GET["ID"]);
                     </div>
                 </div>
         </div>
+        <div class="row">
+    <div class="centered">
+  <a href="https://www.germany.travel/en/home.html" target="_blank">
+   <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad34.png" id="adBanner" alt="Ad Banner" /> </center>
+  </a>
+</div>
     <?php include 'footer-sidebar.inc.php'; ?>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>

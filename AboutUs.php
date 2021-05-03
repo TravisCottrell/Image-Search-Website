@@ -8,7 +8,9 @@
 </style>
 <body>
   <?php include 'header.inc.php'; ?>
-
+<div class="fixleft">
+        <a href="https://www.royalcaribbean.com/?ecid=ps_43700055460434106&country=USA&gclid=Cj0KCQjwvr6EBhDOARIsAPpqUPFhnbfa3qw-QtMEJE_M_NAo5PfYG63S33anMrjG65BWSIAzsGnchi4aAkbNEALw_wcB&gclsrc=aw.ds"><img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad11.png"></a>
+      </div>
 <div class="container">
     <div class="row" id="hometitle">
       <div class="col" >
@@ -44,6 +46,7 @@
 <div class="spinner-border text-light"></div>
 
 </div>
+
 
   <?php include 'footer.inc.php'; ?>
 

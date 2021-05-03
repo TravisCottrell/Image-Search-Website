@@ -15,6 +15,7 @@ if(isset($_GET["ISO"])){
 
 <body>
     <?php include 'header-sidebar.inc.php'; ?>
+
         <div class="col-md-10">
             <div class="row">
                 <div class="col-md-12">
@@ -63,6 +64,13 @@ if(isset($_GET["ISO"])){
                     </div>
                 </div> 
         </div>
+<div class="row">
+    <div class="centered">
+  <a href="https://www.visititaly.eu/" target="_blank">
+   <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad54.png" id="adBanner" alt="Ad Banner" /> </center>
+  </a>
+</div>
+</div>
     <?php include 'footer-sidebar.inc.php'; ?>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
