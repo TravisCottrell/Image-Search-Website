@@ -31,6 +31,7 @@ if(isset($_POST['submit'])) {
 
 if(isset($_POST['submit_2'])) {
 	session_destroy();
+	header("location: index.php");
 }
 
 ?>

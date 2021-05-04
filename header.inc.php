@@ -2,6 +2,8 @@
     
 
     $name = isset($_SESSION['name']) ? $_SESSION['name'] : '';
+    $state = $_SESSION['State']??NULL;
+
 ?>
 <header>
     <!-- top part of the header -->
@@ -9,6 +11,11 @@
         <li class="navbar-brand" id="nav-bar-logo" ><img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/logo.png"></li>
         <div class="collapse navbar-collapse">
             <ul class="nav nav-tabs ml-auto"> 
+                <?php
+                  if($state == '2') {
+                    echo '<li class="nav-item"><a  href="adminUserList.php" class="nav-link">Edit User Details</a></li>';
+                  }
+                ?>
                 <li class='nav-item'><a  href='favorites.php' role='button'><span class="bi bi-heart-fill nav-link"> favorites</span></a></li>
                 <li class="nav-item"><a  href="MyAccount.php" class="nav-link">My Account</a></li>
                 <li class="nav-item"><a  href="login.php" class="nav-link">Login</a></li>
