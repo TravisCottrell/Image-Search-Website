@@ -120,13 +120,48 @@ class DB extends PDO{
 
     public function get_for_UserList(){
         echo "<h2>User List</h2>";
-        $sql = "SELECT UID, FirstName, LastName FROM traveluserdetails Order BY FirstName";
+        $sql = "SELECT UID, FirstName, LastName FROM traveluserdetails GROUP BY FirstName, LastName Order BY FirstName";
         $result = $this->query($sql);
         while ($row = $result->fetch()) {
             $fullname = $row['FirstName'] ." ". $row["LastName"];
             echo "<li><a href='DisplaySingleUser.php?UID=".$row["UID"]."'>" . $fullname. "</a></li>"; 
         }
     }
+    //////////////////////////////////////////////
+    // userlist and edit for admin
+    //////////////////////////////////////////////
+    public function get_for_adminUserList(){
+        echo "<h2>Select User to Edit</h2>";
+        $sql = "SELECT DISTINCT UID, FirstName, LastName FROM traveluserdetails GROUP BY FirstName, LastName Order BY FirstName";
+        $result = $this->query($sql);
+        while ($row = $result->fetch()) {
+            $fullname = $row['FirstName'] ." ". $row["LastName"];
+            echo "<li><a href='edituser.php?UID=".$row["UID"]."'>" . $fullname. "</a></li>"; 
+        }
+    }
+
+    public function edit_user_info($UID) {
+        $sql = "SELECT * FROM traveluserdetails WHERE UID = $UID";
+         return $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function update_user($firstname,$lastname,$address,$city,$region,$country,$postal,$phone,$email,$UID) {
+        $sql = "UPDATE `traveluserdetails` SET FirstName = '$firstname', LastName = '$lastname', Address = '$address', City = '$city', Region = '$region', Country = '$country', Postal = '$postal', Phone = '$phone', Email = '$email' WHERE UID = '$UID'";
+        $result = $this->query($sql);
+    }
+
+// last name, city, address and country not blank, proper email
+    public function get_for_admin_edit_user(){
+        echo "<h2>User List</h2>";
+        $sql = "SELECT UID, FirstName, LastName, FROM traveluserdetails Order BY FirstName";
+        $result = $this->query($sql);
+        while ($row = $result->fetch()) {
+            $fullname = $row['FirstName'] ." ". $row["LastName"];
+            echo "<li><a href='edituser.php?UID=".$row["UID"]."'>" . $fullname. "</a></li>"; 
+        }
+    }
+
+
     //////////////////////////////////////////////
     //DisplaySingleUser.php functions
     //////////////////////////////////////////////

@@ -1,16 +1,9 @@
 <?php require_once("DB.class.php"); ?>
 <html>
 <title>About Us</title>
-<style type="text/css">
-#msg-text{
-    font-family: 'Grenze Gotisch', cursive;
- }
-</style>
+
 <body>
   <?php include 'header.inc.php'; ?>
-<div class="fixleft">
-        <a href="https://www.royalcaribbean.com/?ecid=ps_43700055460434106&country=USA&gclid=Cj0KCQjwvr6EBhDOARIsAPpqUPFhnbfa3qw-QtMEJE_M_NAo5PfYG63S33anMrjG65BWSIAzsGnchi4aAkbNEALw_wcB&gclsrc=aw.ds"><img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad11.png"></a>
-      </div>
 <div class="container">
     <div class="row" id="hometitle">
       <div class="col" >
@@ -32,7 +25,7 @@
 <div class="spinner-grow text-light"></div>
 
 <h4 id="msg-text">William developed the following pages: </h4>
-<p>aboutus;browse-images;login;favorites</p>
+<p>aboutus;browse-images;login;favorites;adminUserList;edituser</p>
 <h5>and helped with these pages</h5>
 <p>DBClass;header;SinglePost</p>
 <div class="spinner-border text-muted"></div>
@@ -46,7 +39,9 @@
 <div class="spinner-border text-light"></div>
 
 </div>
-
+<div class="fixleft">
+        <a href="https://www.royalcaribbean.com/?ecid=ps_43700055460434106&country=USA&gclid=Cj0KCQjwvr6EBhDOARIsAPpqUPFhnbfa3qw-QtMEJE_M_NAo5PfYG63S33anMrjG65BWSIAzsGnchi4aAkbNEALw_wcB&gclsrc=aw.ds"><img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad11.png"></a>
+</div>
 
   <?php include 'footer.inc.php'; ?>
 
