@@ -75,11 +75,11 @@ if(isset($_POST['submit'])) {
 	<?php 
 	if (isset($_POST['submit'])) {
 	echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Account has been updated!!</strong>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>'; 
+			  <strong>Account has been updated!!</strong>
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>'; 
 	}
 ?>
 <h2>Update User Details</h2>
@@ -93,18 +93,18 @@ if(isset($_POST['submit'])) {
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">Lastname</label>
-		      <input type="text" class="form-control" id="lname" name="lname" placeholder="Lastname">
+		      <input type="text" class="form-control" id="lname" name="lname" placeholder="Lastname" required>
 		    </div>
 		  </div>
 
 		  <div class="form-row">
 		    <div class="form-group col-md-6">
 		      <label for="address">Address</label>
-		      <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+		      <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label for="city">City</label>
-		      <input type="text" class="form-control" id="city" name="city" placeholder="City">
+		      <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
 		    </div>
 		  </div>
 
@@ -115,7 +115,7 @@ if(isset($_POST['submit'])) {
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label for="inputPassword4">Country</label>
-		      <input type="test" class="form-control" id="country" name="country" placeholder="Country">
+		      <input type="test" class="form-control" id="country" name="country" placeholder="Country" required>
 		    </div>
 		  </div>
 
@@ -126,13 +126,13 @@ if(isset($_POST['submit'])) {
 		    </div>
 		    <div class="form-group col-md-6">
 		      <label for="phone">Phone</label>
-		     <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+		     <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number">
 		    </div>
 			</div>
 
 			<div class="form-group">
 		    <label for="email">Email</label>
-		    <input type="text" class="form-control" id="email" name="email" >
+		    <input type="email" class="form-control" id="email" name="email">
 		  </div>
 			<input type="hidden" name="getid" value="<?php echo $_GET['UID']??NULL; ?>">
 		  <button type="submit" class="btn btn-outline-primary col-md-12" name="submit">Confirm Changes</button>
