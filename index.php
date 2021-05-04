@@ -65,6 +65,9 @@ require_once("DB.class.php");
 
 <div class="container">
   <center><h2>Check Out The highest Rated images by our World Travelers</h2></center>
+  <div class="fixleft">
+        <a href="https://www.royalcaribbean.com/?ecid=ps_43700055460434106&country=USA&gclid=Cj0KCQjwvr6EBhDOARIsAPpqUPFhnbfa3qw-QtMEJE_M_NAo5PfYG63S33anMrjG65BWSIAzsGnchi4aAkbNEALw_wcB&gclsrc=aw.ds"><img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad11.png"></a>
+</div>
 </div>
 
 <div class="row">

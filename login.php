@@ -40,11 +40,19 @@ if(isset($_POST['submit_2'])) {
 	<title>Login</title>
 <?php include 'header.inc.php'; ?>
 <body>
-	<div class="centered">
+
+<div class="centered">
   <a href="https://www.kayak.com/horizon/sem/hotels/general?lang=en&skipapp=true&destination=c39163&kw=-1&gclid=Cj0KCQjwvr6EBhDOARIsAPpqUPGOb3WYX8PIVFIRqHe_joXdmXi2bfd7TUFlOZB1J-5NqvmdQJwOVs4aAp1kEALw_wcB&g_kw=kayak&aid=103175289976" target="_blank">
    <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad5.png" id="adBanner" alt="Ad Banner" /> </center>
   </a>
 </div>
+
+<div class="fixright">
+  <a href="http://www.priceline.com/?vrid=2406db20bf6d2767d32ad1a14f909e82" target="_blank">
+   <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad3.png" id="adBanner" alt="Ad Banner" /> </center>
+  </a>
+</div>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12"><br></div>

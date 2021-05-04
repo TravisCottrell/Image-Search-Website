@@ -252,13 +252,21 @@ if(!isset($_GET["filteroption"])) {
 ?>
       
     </div>
-        
+       
+        <div class="fixbottom">
+          <a href="https://www.virginatlantic.com//"><img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad7.png"></a>
+      </div> 
 </div>
+
+
 <div class="fixright">
   <a href="http://www.priceline.com/?vrid=2406db20bf6d2767d32ad1a14f909e82" target="_blank">
    <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad4.png" id="adBanner" alt="Ad Banner" /> </center>
   </a>
 </div>
+
+
+
   <?php include 'footer.inc.php'; ?>
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>

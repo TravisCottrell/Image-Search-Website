@@ -123,6 +123,10 @@ function printsearch(){
 
         <?php printsearch(); ?>
     </div>
+
+     <div class="fixbottom">
+          <a href="https://www.germany.travel/en/home.html"><img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad34.png"></a>
+      </div>
     <?php include 'footer.inc.php'; ?>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>

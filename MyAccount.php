@@ -13,11 +13,19 @@ if(isset($_POST['create'])){
 ?>
 
 <body>
+
 <div class="centered">
   <a href="https://www.agoda.com/?cid=1735414&tag=40510_102bc8d10a8f10a072d1cfaa433781" target="_blank">
    <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad5.png" id="adBanner" alt="Ad Banner" /> </center>
   </a>
 </div>
+
+<div class="fixright">
+  <a href="http://www.priceline.com/?vrid=2406db20bf6d2767d32ad1a14f909e82" target="_blank">
+   <center> <img src="https://webdev-stark.cs.kent.edu/~wwaller/WP2FinalProject/images/ads/travad4.png" id="adBanner" alt="Ad Banner" /> </center>
+  </a>
+</div>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12"><br></div>
